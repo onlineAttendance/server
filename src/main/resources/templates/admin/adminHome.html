@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta th:replace="~{fragment/head :: headFrag('관리하기')}"/>
+    <meta th:replace="~{fragment/head :: styleFrag}"/>
+</head>
+<body class = "text-center">
+<div class="form">
+
+    <h2 class="h3 mb-3 fw-normal">관리하기</h2>
+
+    <button class="w-100 btn btn-primary btn-lg" onclick="location.href='/admin/userPassword'">출석 비밀번호 변경</button>
+    <br/><br/>
+    <button class="w-100 btn btn-primary btn-lg" onclick="location.href='/admin/adminPassword'">관리자 비밀번호 변경</button>
+    <br/><br/>
+    <button class="w-100 btn btn-primary btn-lg" onclick="location.href='/admin/statistics'">출석부 엑셀 다운로드</button>
+    <br/><br/>
+    <button class="w-100 btn btn-primary btn-lg" onclick="location.href='/admin/manager'">유저 관리하기</button>
+    <br/><br/>
+    <button class="w-100 btn btn-warning btn-lg" onclick="location.href='/admin/logout'">로그아웃</button>
+
+</div>
+</body>
+</html>

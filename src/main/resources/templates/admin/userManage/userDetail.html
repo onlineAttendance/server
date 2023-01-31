@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta th:replace="~{fragment/head :: headFrag('유저 출석 상세 정보')}"/>
+    <meta th:replace="~{fragment/head :: styleFrag}"/>
+</head>
+<body class="text-center">
+<div class="form" th:object="${userDetailDto}">
+    <h1 class="h2 mb-3 fw-normal">유저 출석 상세 정보</h1>
+
+    <div>
+        <span>이름 : [[*{name}]]</span><br/>
+        <span>출석수 : [[*{attendanceNumber}]]</span><br/>
+        <span>결석수 : [[*{absenceNumber}]]</span><br/>
+        <span>생일 : [[*{birth}]]</span><br/>
+        <span>전화번호 : [[*{phone}]]</span><br/>
+        <span>팀 : [[*{team}]]</span><br/>
+    </div>
+    <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin/manager'">뒤로가기</button>
+
+    <table class="table table-striped table-hover"
+           style="white-space: nowrap; max-width: 50%; margin-left:auto; margin-right:auto;">
+        <thead>
+        <tr>
+            <th scope="col">날짜</th>
+            <th scope="col">출석 시간</th>
+            <th scope="col">변경하기</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="attendanceDate : *{attendanceDates}">
+            <td th:text="${attendanceDate.date}">date</td>
+
+            <td th:if="${attendanceDate.isAttendance}"
+                th:text="${#strings.equals(attendanceDate.time, '12:00:00') ? '관리자의 의한 출석' : attendanceDate.time}">time
+            </td>
+            <td th:unless="${attendanceDate.isAttendance}" th:text="결석">time</td>
+
+            <td th:if="${attendanceDate.isAttendance}">
+                <button class="btn btn-danger btn-sm"
+                        th:onclick="|location.href='@{/admin/manager/change(userId=*{id}, date=${attendanceDate.date})}'|">
+                    결석으로 변경
+                </button>
+            </td>
+            <td th:if="${!attendanceDate.isAttendance}">
+                <button class="btn btn-success btn-sm"
+                        th:onclick="|location.href='@{/admin/manager/change(userId=*{id}, date=${attendanceDate.date})}'|">
+                    출석으로 변경
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div> <!-- /container -->
+</body>
+</html>
