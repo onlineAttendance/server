@@ -8,13 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Slf4j
 @RequiredArgsConstructor
-public class LoginCheckInterceptor implements HandlerInterceptor {
+public class UserLoginInterceptor implements HandlerInterceptor {
 
     private final TokenManager tokenManager;
 
@@ -29,7 +28,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         // GrantType 이 Bearer 인지 검증
         String[] authorizations = authorizationHeader.split(" ");
-        if (authorizations.length < 2 || (!"Bearer".equals(authorizations[0].toUpperCase()))) {
+        if (authorizations.length < 2 || (!"Bearer".equals(authorizations[0]))) {
             throw new AuthenticationException(ErrorCode.NOT_BEARER_GRANT_TYPE);
         }
 

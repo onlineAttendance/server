@@ -1,23 +1,33 @@
 package com.sungam1004.register.global.config;
 
 import com.sungam1004.register.global.manager.TokenManager;
+import com.sungam1004.register.global.resolver.UserIdArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
     private final TokenManager tokenManager;
+    private final UserIdArgumentResolver userEmailArgumentResolver;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginCheckInterceptor(tokenManager))
+        registry.addInterceptor(new UserLoginInterceptor(tokenManager))
                 .order(1) //낮을 수록 먼저 호출
-                .addPathPatterns("/api/admin/**") //인터셉터를 적용할 url 패턴
+                .addPathPatterns("/api/**") //인터셉터를 적용할 url 패턴
                 .excludePathPatterns("/css/**", "/*.ico", "/error", "/admin/login"); //인터셉터에서 제외할 패턴 지정
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(userEmailArgumentResolver);
     }
 
     /*

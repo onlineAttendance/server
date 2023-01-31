@@ -19,14 +19,13 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean hasEmailAnnotation = parameter.hasParameterAnnotation(UserId.class);
-        boolean hasString = String.class.isAssignableFrom(parameter.getParameterType());
-
-        return hasEmailAnnotation && hasString;
+        boolean hasUserIdAnnotation = parameter.hasParameterAnnotation(UserId.class);
+        boolean isLongClass = Long.class.isAssignableFrom(parameter.getParameterType());
+        return hasUserIdAnnotation && isLongClass;
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         token = token.split(" ")[1];

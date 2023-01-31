@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/attendance")
+@RequestMapping("api/user/attendance")
 public class AttendanceApi {
 
     private final AttendanceService attendanceService;
