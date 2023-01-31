@@ -27,8 +27,8 @@ server:
       tracking-modes: cookie
 
 file:
-  path: /workspace/file
-  #path: /Users/hongseungtaeg/Desktop/toyproject/toyProject7-register/file
+  #path: /workspace/file
+  path: /Users/hongseungtaeg/Desktop/toyproject/toyProject7-register/file
 
 password:
   attendance: 1234

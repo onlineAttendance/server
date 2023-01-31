@@ -77,12 +77,10 @@ public class AdminService {
         if (optionalAttendance.isPresent()) {
             attendanceRepository.delete(optionalAttendance.get());
             user.decreaseAttendanceNumber();
-            user.increaseAbsenceNumber();
             return;
         }
 
         attendanceRepository.save(new Attendance(user, date.atStartOfDay()));
-        user.decreaseAbsenceNumber();
         user.increaseAttendanceNumber();
     }
 
@@ -95,7 +93,6 @@ public class AdminService {
          */
         if (dto.getAttendance()) {
             attendanceRepository.save(new Attendance(user, date.atStartOfDay()));
-            user.decreaseAbsenceNumber();
             user.increaseAttendanceNumber();
         }
         else {
@@ -104,7 +101,6 @@ public class AdminService {
             if (optionalAttendance.isPresent()) {
                 attendanceRepository.delete(optionalAttendance.get());
                 user.decreaseAttendanceNumber();
-                user.increaseAbsenceNumber();
             }
         }
     }

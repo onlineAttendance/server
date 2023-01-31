@@ -13,12 +13,11 @@ public class UserManagerDto {
     private String name;
     private String phone;
     private String birth;
-    private Integer absenceNumber;
     private Integer attendanceNumber;
     private String team;
 
     public static UserManagerDto of(User user) {
-        return new UserManagerDto(user.getId(), user.getName(), user.getPhone(), user.getBirth(), user.getAbsenceNumber(),
+        return new UserManagerDto(user.getId(), user.getName(), user.getPassword(), user.getBirth(),
                 user.getAttendanceNumber(), user.getTeam().toString());
     }
 }

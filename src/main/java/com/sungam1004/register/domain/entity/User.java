@@ -19,7 +19,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    private String phone;
+    private String password;
     private String birth;
     private Integer attendanceNumber;
     private String faceImageUri;
@@ -28,9 +28,9 @@ public class User {
     private Team team;
 
     @Builder
-    public User(String name, String phone, String birth, Team team, String faceImageUri) {
+    public User(String name, String password, String birth, Team team, String faceImageUri) {
         this.name = name;
-        this.phone = phone;
+        this.password = password;
         this.birth = birth;
         this.team = team;
         this.faceImageUri = faceImageUri;

@@ -18,8 +18,8 @@ public class AddUserDto {
         @NotBlank(message = "이름은 필수입니다.")
         private String name;
 
-        @Pattern(regexp = "^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$", message = "전화번호는 xxx-xxx(x)-xxxx 형식으로 입력해야 합니다.")
-        private String phone;
+        @Pattern(regexp = "^[0-9]{4}$", message = "비밀번호는 숫자 4자리입니다.")
+        private String password;
 
         @Pattern(regexp = "[0-9][0-9].[0-9][0-9].[0-9][0-9].", message = "생년월일은 YY.MM.DD. 형식으로 입력해야 합니다.")
         private String birth;
@@ -32,7 +32,7 @@ public class AddUserDto {
             return User.builder()
                     .name(name)
                     .birth(birth)
-                    .phone(phone)
+                    .password(password)
                     .team(Team.convertTeamByString(team))
                     .build();
         }

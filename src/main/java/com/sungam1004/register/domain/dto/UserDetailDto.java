@@ -18,14 +18,13 @@ public class UserDetailDto {
     private String name;
     private String phone;
     private String birth;
-    private Integer absenceNumber;
     private Integer attendanceNumber;
     private String team;
 
     private List<AttendanceDate> attendanceDates;
 
     public static UserDetailDto of(User user, List<AttendanceDate> AttendanceDates) {
-        return new UserDetailDto(user.getId(), user.getName(), user.getPhone(), user.getBirth(), user.getAbsenceNumber(),
+        return new UserDetailDto(user.getId(), user.getName(), user.getPassword(), user.getBirth(),
                 user.getAttendanceNumber(), user.getTeam().toString(), AttendanceDates);
     }
 
