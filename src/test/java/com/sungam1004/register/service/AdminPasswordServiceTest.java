@@ -1,8 +1,9 @@
 package com.sungam1004.register.service;
 
-import com.sungam1004.register.exception.CustomException;
-import com.sungam1004.register.exception.ErrorCode;
-import com.sungam1004.register.manager.PasswordManager;
+import com.sungam1004.register.domain.service.AdminPasswordService;
+import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.manager.PasswordManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +56,7 @@ class AdminPasswordServiceTest {
     void changeUserPasswordSuccess() {
         //given
         String password = "tjddkaryghl";
-        Mockito.doNothing().when(passwordManager).changeUserPassword(password);
+        Mockito.doNothing().when(passwordManager).changeAttendancePassword(password);
 
         //when then
         adminPasswordService.changeUserPassword(password);
@@ -67,7 +68,7 @@ class AdminPasswordServiceTest {
         //given
         String password = "tjddkaryghl";
         Mockito.doThrow(new CustomException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD))
-                .when(passwordManager).changeUserPassword(password);
+                .when(passwordManager).changeAttendancePassword(password);
 
         //when
         CustomException customException = assertThrows(CustomException.class, () -> {

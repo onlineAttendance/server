@@ -1,13 +1,14 @@
 package com.sungam1004.register.service;
 
-import com.sungam1004.register.domain.Team;
-import com.sungam1004.register.domain.User;
-import com.sungam1004.register.dto.AddUserDto;
-import com.sungam1004.register.dto.UserManagerDto;
-import com.sungam1004.register.exception.CustomException;
-import com.sungam1004.register.exception.ErrorCode;
-import com.sungam1004.register.repository.AttendanceRepository;
-import com.sungam1004.register.repository.UserRepository;
+import com.sungam1004.register.domain.entity.Team;
+import com.sungam1004.register.domain.entity.User;
+import com.sungam1004.register.domain.dto.AddUserDto;
+import com.sungam1004.register.domain.dto.UserManagerDto;
+import com.sungam1004.register.domain.service.AdminService;
+import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.domain.repository.AttendanceRepository;
+import com.sungam1004.register.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

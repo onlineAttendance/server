@@ -31,5 +31,8 @@ file:
   #path: /Users/hongseungtaeg/Desktop/toyproject/toyProject7-register/file
 
 password:
-  user: 1234
+  attendance: 1234
   admin: rhksflwk
+
+token:
+  secret: test
