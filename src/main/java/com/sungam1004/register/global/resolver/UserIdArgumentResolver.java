@@ -13,13 +13,13 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
 @RequiredArgsConstructor
-public class UserEmailArgumentResolver implements HandlerMethodArgumentResolver {
+public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final TokenManager tokenManager;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean hasEmailAnnotation = parameter.hasParameterAnnotation(UserEmail.class);
+        boolean hasEmailAnnotation = parameter.hasParameterAnnotation(UserId.class);
         boolean hasString = String.class.isAssignableFrom(parameter.getParameterType());
 
         return hasEmailAnnotation && hasString;

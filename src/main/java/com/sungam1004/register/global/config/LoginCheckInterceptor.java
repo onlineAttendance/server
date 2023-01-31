@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-@Component
 @Slf4j
 @RequiredArgsConstructor
 public class LoginCheckInterceptor implements HandlerInterceptor {

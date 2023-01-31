@@ -12,11 +12,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DateValid {
 
-    String message() default "6자리의 yyyyMMdd 형식이어야 합니다.";
+    String message() default "yyyy.MM.dd 형식이어야 합니다.";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String pattern() default "yyyyMMdd";
+    String pattern() default "yyyy.MM.dd";
 }

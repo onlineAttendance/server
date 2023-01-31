@@ -30,13 +30,13 @@ public class AttendanceService {
     private final UserRepository userRepository;
     private final PasswordManager passwordManager;
 
-    public String saveAttendance(String name, String password) {
+    public String saveAttendance(Long userId, String password) {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
             throw new CustomException(ErrorCode.INCORRECT_PASSWORD);
         }
         //if (!validSunday()) throw new CustomException(ErrorCode.INVALID_DAY_OF_WEEK);
 
-        User user = userRepository.findByName(name)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
         if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
@@ -46,7 +46,7 @@ public class AttendanceService {
         Attendance attendance = new Attendance(user);
         attendanceRepository.save(attendance);
         user.increaseAttendanceNumber();
-        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", name, attendance.getCreatedAt());
+        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
         return user.getTeam().toString();
     }
 
@@ -55,6 +55,7 @@ public class AttendanceService {
         return dayOfWeek.getValue() == 7; // 월=1, 일=7
     }
 
+    @Transactional(readOnly = true)
     public AttendanceDto.Response findTodayAttendanceByTeam(String strTeam) {
         Team team = Team.convertTeamByString(strTeam);
         List<User> users = userRepository.findByTeam(team);
@@ -66,9 +67,6 @@ public class AttendanceService {
                 response.getAttendanceNames().add(user.getName());
             else response.getNotAttendanceNames().add(user.getName());
         }
-        double ratio = (double) response.getAttendanceNames().size()*100 / users.size();
-        response.setRatio((int) Math.round(ratio));
-        System.out.println(ratio);
         return response;
     }
 }

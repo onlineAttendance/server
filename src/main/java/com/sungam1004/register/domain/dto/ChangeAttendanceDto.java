@@ -13,7 +13,7 @@ public class ChangeAttendanceDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Request {
-        @DateValid(message = "8자리의 yyyy-MM-dd 형식이어야 합니다.", pattern = "yyyy-MM-dd")
+        @DateValid(message = "yyyy-MM-dd 형식이어야 합니다.", pattern = "yyyy-MM-dd")
         private String date;
 
         @NotNull
