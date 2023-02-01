@@ -1,4 +1,4 @@
-package com.sungam1004.register.domain.api;
+package com.sungam1004.register.domain.controller.admin;
 
 import com.sungam1004.register.domain.service.AdminExcelService;
 import lombok.RequiredArgsConstructor;
@@ -8,17 +8,17 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.net.MalformedURLException;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/admin/statistics")
+@RequestMapping("admin/statistics")
 @Slf4j
-public class AdminStatisticsApi {
+public class AdminStatisticsController {
 
     private final AdminExcelService adminExcelService;
 

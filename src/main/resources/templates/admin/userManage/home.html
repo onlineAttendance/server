@@ -34,9 +34,8 @@
         <tr>
             <th scope="col">이름</th>
             <th scope="col">출석수</th>
-            <th scope="col">결석수</th>
             <th scope="col">생일</th>
-            <th scope="col">전화번호</th>
+            <th scope="col">비밀번호</th>
             <th scope="col">팀</th>
         </tr>
         </thead>
@@ -45,9 +44,8 @@
         <tr th:each="user : ${users}" th:onclick="|location.href='/admin/manager/detail/${user.id}'|">
             <td th:text="${user.name}">name</td>
             <td th:text="${user.attendanceNumber}">attendanceNumber</td>
-            <td th:text="${user.absenceNumber}">absenceNumber</td>
             <td th:text="${user.birth}">birth</td>
-            <td th:text="${user.phone}">phone</td>
+            <td th:text="${user.password}">password</td>
             <td th:text="${user.team}">team</td>
         </tr>
         </tbody>

@@ -1,4 +1,4 @@
-package com.sungam1004.register.global.config;
+package com.sungam1004.register.global.interceptor;
 
 import com.sungam1004.register.global.exception.AuthenticationException;
 import com.sungam1004.register.global.exception.ErrorCode;

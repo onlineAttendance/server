@@ -16,7 +16,7 @@ public class UserDetailDto {
 
     private Long id;
     private String name;
-    private String phone;
+    private String password;
     private String birth;
     private Integer attendanceNumber;
     private String team;

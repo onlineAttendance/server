@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-public class UserPasswordDto {
+public class AttendancePasswordDto {
 
     @Data
     @NoArgsConstructor

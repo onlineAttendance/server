@@ -24,13 +24,13 @@
             <br/>
 
             <div class="form-floating">
-            <input type="text" id="phone" th:field="*{phone}"
+            <input type="text" id="password" th:field="*{password}"
                    th:errorclass="field-error" class="form-control"
-                   placeholder="전화번호(xxx-xxx(x)-xxxx 형식)">
-            <div class="field-error text-start" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
-                전화번호
+                   placeholder="비밀번호(숫자 4개)">
+            <div class="field-error text-start" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                비밀번호
             </div>
-            <label for="phone">전화번호</label>
+            <label for="password">비밀번호</label>
             </div>
             <br/>
 
