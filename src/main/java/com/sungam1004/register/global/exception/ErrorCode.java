@@ -37,6 +37,9 @@ public enum ErrorCode {
     INVALID_DAY_OF_WEEK(HttpStatus.BAD_REQUEST, "A001", "출석은 일요일만 가능합니다."),
     DUPLICATE_ATTENDANCE(HttpStatus.BAD_REQUEST, "A002", "금일은 이미 출석했습니다."),
 
+    FAIL_STORE_IMAGE(HttpStatus.BAD_REQUEST, "I001", "이미지 저장에 실패했습니다."),
+    FAIL_CALL_IMAGE(HttpStatus.BAD_REQUEST, "I002", "이미지를 불러오는데 실패했습니다."),
+
 
     ;
 

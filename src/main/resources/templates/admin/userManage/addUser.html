@@ -10,8 +10,12 @@
         <h2>유저 등록하기</h2>
     </div>
 
-    <form th:action="@{/admin/manager/add}" method="post" th:object="${addUserDto}">
+    <form th:action="@{/admin/manager/add}" method="post" th:object="${addUserDto}" enctype="multipart/form-data">
         <div>
+            <label for="faceImageFile" class="form-label">얼굴 이미지 업로드</label>
+            <input type="file" class="form-control" id="faceImageFile" name="faceImageFile" accept="image/*">
+            <br/>
+
             <div class="form-floating">
                 <input type="text" id="name" th:field="*{name}"
                        th:errorclass="field-error" class="form-control"

@@ -28,11 +28,12 @@ public class AddUserDto {
         private String team;
 
 
-        public User toEntity() {
+        public User toEntity(String faceImageUri) {
             return User.builder()
                     .name(name)
                     .birth(birth)
                     .password(password)
+                    .faceImageUri(faceImageUri)
                     .team(Team.convertTeamByString(team))
                     .build();
         }

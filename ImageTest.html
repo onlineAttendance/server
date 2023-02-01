@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>imageTest</title>
+</head>
+
+<body>
+  <h1>face image Test</h1>
+  <input type="text" placeholder="Image Stored Url" id="face">
+  <button onclick="chImg(face)">변경하기</button>
+  <br>
+  <img src="http://" width="300" id="faceImg">
+
+
+<script type="text/javascript">
+  function chImg(tg) {
+    const target = tg.id;
+    const name = tg.value;
+    document.getElementById(target+"Img").src = "http://localhost:8080/api/users/images/"+name;
+  }
+</script>
+</body>
+</html>
