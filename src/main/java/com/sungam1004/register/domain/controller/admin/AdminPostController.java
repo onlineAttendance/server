@@ -1,6 +1,7 @@
 package com.sungam1004.register.domain.controller.admin;
 
 import com.sungam1004.register.domain.dto.PostManagerDto;
+import com.sungam1004.register.domain.dto.SavePostDto;
 import com.sungam1004.register.domain.service.AdminPostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,12 @@ public class AdminPostController {
         List<PostManagerDto> ret = adminPostService.findPostList();
         model.addAttribute("postManagerDto", ret);
         return "admin/post/postList";
+    }
+
+    @GetMapping("add")
+    public String savePost(Model model) {
+        model.addAttribute("savePostDto", new SavePostDto.Request());
+        return "admin/post/savePostForm";
     }
 
     /*

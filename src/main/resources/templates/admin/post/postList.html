@@ -40,7 +40,8 @@
       <td th:text="${post.date}">date</td>
       <td th:if="${post.isExist}" th:text="${post.title}"
           th:onclick="|location.href='/admin/post/detail/${post.id}'|">title</td>
-      <td th:unless="${post.isExist}" style="color: #dc3545">아직 입력되지 않았습니다.</td>
+      <td th:unless="${post.isExist}" style="color: #dc3545"
+          th:onclick="|location.href='@{/admin/post/add(date=${post.date})}'|">아직 입력되지 않았습니다.</td>
     </tr>
     </tbody>
   </table>
