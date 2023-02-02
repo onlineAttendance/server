@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta th:replace="~{fragment/head :: headFrag('게시물')}"/>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 40px;
+    }
+
+    .form {
+      width: 100%;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body class="text-center">
+<div class="form">
+  <h1 class="h2 mb-3 fw-normal">게시물 관리하기</h1>
+  <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin'">뒤로가기</button>
+
+  <table class="table table-striped table-hover" style="white-space: nowrap; max-width: 80%; margin-left:auto; margin-right:auto;">
+    <thead>
+    <tr>
+      <th scope="col">날짜</th>
+      <th scope="col">제목</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="post : ${postManagerDto}">
+      <td th:text="${post.date}">date</td>
+      <td th:if="${post.isExist}" th:text="${post.title}"
+          th:onclick="|location.href='/admin/post/detail/${post.id}'|">title</td>
+      <td th:unless="${post.isExist}" style="color: #dc3545">아직 입력되지 않았습니다.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
