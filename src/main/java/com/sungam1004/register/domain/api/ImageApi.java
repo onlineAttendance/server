@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/users")
 public class ImageApi {
 
-    private ImageService imageService;
+    private final ImageService imageService;
 
     @GetMapping("/images/{filename}")
     public Resource showImage(@PathVariable String filename) {
         // <img src="/images/[파일이름]">
+        // th:src="@{${item.getImgPath()}}"
         return imageService.getImageFile(filename);
     }
 
