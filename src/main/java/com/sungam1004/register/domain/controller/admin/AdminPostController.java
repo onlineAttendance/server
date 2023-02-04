@@ -1,9 +1,6 @@
 package com.sungam1004.register.domain.controller.admin;
 
-import com.sungam1004.register.domain.dto.PostDetailDto;
-import com.sungam1004.register.domain.dto.PostManagerDto;
-import com.sungam1004.register.domain.dto.SavePostDto;
-import com.sungam1004.register.domain.dto.UserDetailDto;
+import com.sungam1004.register.domain.dto.*;
 import com.sungam1004.register.domain.service.AdminPostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +51,14 @@ public class AdminPostController {
         }
         adminPostService.savePost(requestDto);
         return "admin/post/completeSavePost";
+    }
+
+    @GetMapping("edit/{postId}")
+    public String editPostFrom(@PathVariable Long postId, Model model) {
+        EditPostDto editPostDto = adminPostService.editPostById(postId);
+        model.addAttribute("editPostDto", editPostDto);
+        log.info("editPostDto={}", editPostDto);
+        return "admin/post/editPostForm";
     }
 
     /*

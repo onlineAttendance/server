@@ -6,7 +6,7 @@
 </head>
 <body class="text-center">
 <div class="form" th:object="${postDetailDto}">
-
+    <input type="hidden" th:field="*{postId}" th:value="*{postId}">
     <h2 th:text="*{title}">Title</h2>
     <div th:text="*{content}">content</div>
 
@@ -17,6 +17,7 @@
         <div th:text="${question}"></div>
         <br/>
     </div>
+    <button class="w-50 btn btn-primary btn-sm" th:onclick="|location.href='@{/admin/post/edit/{postId}(postId=*{postId})}'|">수정하기</button>
     <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin'">뒤로가기</button>
 
 </div> <!-- /container -->

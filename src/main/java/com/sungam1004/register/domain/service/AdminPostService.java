@@ -1,5 +1,6 @@
 package com.sungam1004.register.domain.service;
 
+import com.sungam1004.register.domain.dto.EditPostDto;
 import com.sungam1004.register.domain.dto.PostDetailDto;
 import com.sungam1004.register.domain.dto.PostManagerDto;
 import com.sungam1004.register.domain.dto.SavePostDto;
@@ -78,6 +79,22 @@ public class AdminPostService {
         for (Question question : questions) {
             ret.getQuestions().add(question.getContent());
         }
+        return ret;
+    }
+
+    public EditPostDto editPostById(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
+        EditPostDto ret = EditPostDto.of(post);
+
+        List<Question> questions = questionRepository.findByPost(post);
+        for (Question question : questions) {
+            ret.getQuestions().add(new EditPostDto.Question(question.getOrder(), question.getContent()));
+        }
+        if (questions.size() == 0)
+            ret.getQuestions().add(new EditPostDto.Question(1, ""));
+        if (questions.size() == 1)
+            ret.getQuestions().add(new EditPostDto.Question(2, ""));
         return ret;
     }
 }

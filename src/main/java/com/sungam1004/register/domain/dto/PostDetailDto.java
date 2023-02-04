@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PostDetailDto {
 
+    private Long postId;
     private String title;
 
     private String content;
@@ -22,10 +23,11 @@ public class PostDetailDto {
 
 
     @Builder
-    public PostDetailDto(String title, String content, String date) {
+    public PostDetailDto(String title, String content, String date, Long postId) {
         this.title = title;
         this.content = content;
         this.date = date;
+        this.postId = postId;
     }
 
     public static PostDetailDto of(Post post) {
@@ -33,6 +35,7 @@ public class PostDetailDto {
                 .content(post.getContent())
                 .title(post.getTitle())
                 .date(post.getDate().format(DateTimeFormatter.ISO_DATE))
+                .postId(post.getId())
                 .build();
     }
 
