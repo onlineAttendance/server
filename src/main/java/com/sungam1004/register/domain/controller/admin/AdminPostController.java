@@ -1,14 +1,17 @@
 package com.sungam1004.register.domain.controller.admin;
 
+import com.sungam1004.register.domain.dto.PostDetailDto;
 import com.sungam1004.register.domain.dto.PostManagerDto;
 import com.sungam1004.register.domain.dto.SavePostDto;
+import com.sungam1004.register.domain.dto.UserDetailDto;
 import com.sungam1004.register.domain.service.AdminPostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,10 +29,31 @@ public class AdminPostController {
         return "admin/post/postList";
     }
 
+    @GetMapping("detail/{postId}")
+    public String postDetailForm(@PathVariable Long postId, Model model) {
+        PostDetailDto response = adminPostService.postDetail(postId);
+        model.addAttribute("postDetailDto", response);
+        return "admin/post/postDetail";
+    }
+
     @GetMapping("add")
-    public String savePost(Model model) {
-        model.addAttribute("savePostDto", new SavePostDto.Request());
+    public String savePostForm(Model model) {
+        SavePostDto.Request request = new SavePostDto.Request();
+        request.getQuestions().add(new SavePostDto.Request.Question(1, ""));
+        request.getQuestions().add(new SavePostDto.Request.Question(2, ""));
+        model.addAttribute("savePostDto", request);
         return "admin/post/savePostForm";
+    }
+
+    @PostMapping("add")
+    public String savePost(@Valid @ModelAttribute("savePostDto") SavePostDto.Request requestDto,
+                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.info("post 저장 실패");
+            return "admin/post/savePostForm";
+        }
+        adminPostService.savePost(requestDto);
+        return "admin/post/completeSavePost";
     }
 
     /*

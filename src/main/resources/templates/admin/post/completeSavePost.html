@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta th:replace="~{fragment/head :: headFrag('유저 추가 성공')}"/>
+  <meta th:replace="~{fragment/head :: styleFrag}"/>
+  <style>
+    .container {
+      max-width: 560px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>게시물이 추가되었습니다.</h2>
+    <button class="w-50 btn btn-success btn-lg" onclick="location.href='/admin/post/list'">게시물 관리하기</button>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>

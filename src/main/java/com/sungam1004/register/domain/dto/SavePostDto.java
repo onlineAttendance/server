@@ -1,5 +1,6 @@
 package com.sungam1004.register.domain.dto;
 
+import com.sungam1004.register.domain.entity.Post;
 import com.sungam1004.register.global.validation.annotation.DateValid;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +38,7 @@ public class SavePostDto {
         @Data
         @NoArgsConstructor
         @AllArgsConstructor
-        private static class Question {
+        public static class Question {
 
             @NotNull
             private Integer order;
@@ -43,6 +46,14 @@ public class SavePostDto {
             @NotBlank
             @Size(max = 100, message = "각 질문은 최대 {max}자리 이하입니다.")
             private String content;
+        }
+
+        public Post toEntity() {
+            return Post.builder()
+                    .content(content)
+                    .title(title)
+                    .date(LocalDate.parse(date, DateTimeFormatter.ISO_DATE))
+                    .build();
         }
     }
 
