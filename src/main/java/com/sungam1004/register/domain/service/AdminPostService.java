@@ -70,6 +70,7 @@ public class AdminPostService {
         postRepository.save(post);
     }
 
+    @Transactional(readOnly = true)
     public PostDetailDto postDetail(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
@@ -82,7 +83,8 @@ public class AdminPostService {
         return ret;
     }
 
-    public EditPostDto editPostById(Long postId) {
+    @Transactional(readOnly = true)
+    public EditPostDto editPostFormById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
         EditPostDto ret = EditPostDto.of(post);
@@ -96,5 +98,25 @@ public class AdminPostService {
         if (questions.size() == 1)
             ret.getQuestions().add(new EditPostDto.Question(2, ""));
         return ret;
+    }
+
+    public void editPost(Long postId, EditPostDto requestDto) {
+        postRepository.deleteById(postId);
+        Post post = requestDto.toEntity();
+
+        List<EditPostDto.Question> questions = requestDto.getQuestions();
+        int orderNum = 0;
+        for (EditPostDto.Question questionDto : questions) {
+            if (questionDto.getContent().trim().length() != 0) {
+                Question question = Question.builder()
+                        .order(orderNum++)
+                        .content(questionDto.getContent())
+                        .build();
+                post.addQuestion(question);
+
+                questionRepository.save(question);
+            }
+        }
+        postRepository.save(post);
     }
 }

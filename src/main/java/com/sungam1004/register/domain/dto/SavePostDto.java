@@ -43,8 +43,6 @@ public class SavePostDto {
             @NotNull
             private Integer order;
 
-            @NotBlank
-            @Size(max = 100, message = "각 질문은 최대 {max}자리 이하입니다.")
             private String content;
         }
 

@@ -1,6 +1,9 @@
 package com.sungam1004.register.domain.controller.admin;
 
-import com.sungam1004.register.domain.dto.*;
+import com.sungam1004.register.domain.dto.EditPostDto;
+import com.sungam1004.register.domain.dto.PostDetailDto;
+import com.sungam1004.register.domain.dto.PostManagerDto;
+import com.sungam1004.register.domain.dto.SavePostDto;
 import com.sungam1004.register.domain.service.AdminPostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +58,22 @@ public class AdminPostController {
 
     @GetMapping("edit/{postId}")
     public String editPostFrom(@PathVariable Long postId, Model model) {
-        EditPostDto editPostDto = adminPostService.editPostById(postId);
+        EditPostDto editPostDto = adminPostService.editPostFormById(postId);
         model.addAttribute("editPostDto", editPostDto);
         log.info("editPostDto={}", editPostDto);
         return "admin/post/editPostForm";
+    }
+
+    @PostMapping("edit/{postId}")
+    public String editPost(@PathVariable Long postId,
+                           @Valid @ModelAttribute("editPostDto") EditPostDto requestDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.info("post 수정 실패");
+            return "admin/post/editPostForm";
+        }
+        adminPostService.editPost(postId, requestDto);
+        log.info("editPostCompleDto={}", requestDto);
+        return "admin/post/completeSavePost";
     }
 
     /*
