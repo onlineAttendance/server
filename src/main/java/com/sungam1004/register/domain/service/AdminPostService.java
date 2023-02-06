@@ -1,9 +1,6 @@
 package com.sungam1004.register.domain.service;
 
-import com.sungam1004.register.domain.dto.EditPostDto;
-import com.sungam1004.register.domain.dto.PostDetailDto;
-import com.sungam1004.register.domain.dto.PostManagerDto;
-import com.sungam1004.register.domain.dto.SavePostDto;
+import com.sungam1004.register.domain.dto.*;
 import com.sungam1004.register.domain.entity.Post;
 import com.sungam1004.register.domain.entity.Question;
 import com.sungam1004.register.domain.repository.PostRepository;
@@ -13,6 +10,8 @@ import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.SundayDateManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +20,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -118,5 +118,17 @@ public class AdminPostService {
             }
         }
         postRepository.save(post);
+    }
+
+    public List<PostResponseDto> findPostUsingPage(int page) {
+        // 한 페이지당 넘어올 데이터 개수 = 5
+        // 페이지는 0부터 계산이 됨
+        // Sort.by(정렬방식, 정렬기준)
+        // Sort.by(정렬기준): 기본적으로 오름차순으로 정렬
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "date"));
+        return postRepository.findAll(pageable).stream()
+                //.map(post -> PostResponse(post.getId(), post.getTitle(), post.getContent())
+                .map(PostResponseDto::of)
+                .collect(Collectors.toList());
     }
 }
