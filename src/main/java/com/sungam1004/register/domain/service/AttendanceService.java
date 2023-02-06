@@ -63,9 +63,8 @@ public class AttendanceService {
         AttendanceDto.Response response = new AttendanceDto.Response(strTeam);
         LocalDateTime startDatetime = LocalDate.now().atStartOfDay();
         for (User user : users) {
-            if (attendanceRepository.existsByUserAndCreatedAtAfter(user, startDatetime))
-                response.getAttendanceNames().add(user.getName());
-            else response.getNotAttendanceNames().add(user.getName());
+            boolean isAttendance = attendanceRepository.existsByUserAndCreatedAtAfter(user, startDatetime);
+            response.addPerson(isAttendance, user.getName(), user.getFaceImageUri());
         }
         return response;
     }

@@ -23,11 +23,24 @@ public class AttendanceDto {
     public static class Response {
 
         private String team;
-        private List<String> attendanceNames = new ArrayList<>();
-        private List<String> notAttendanceNames = new ArrayList<>();
+        private List<Person> attendance = new ArrayList<>();
+        private List<Person> notAttendance = new ArrayList<>();
 
         public Response(String team) {
             this.team = team;
+        }
+
+        public void addPerson(boolean isAttendance, String name, String imageFileName) {
+            if (isAttendance) attendance.add(new Person(name, imageFileName));
+            else notAttendance.add(new Person(name, imageFileName));
+        }
+
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        private static class Person {
+            private String name;
+            private String imageFileName;
         }
     }
 }

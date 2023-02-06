@@ -23,14 +23,5 @@ public class UserLoginApi {
     public LoginUserDto.Response loginUser(@Valid @RequestBody LoginUserDto.Request requestDto) {
         return userLoginService.loginUser(requestDto);
     }
-
-    @PostMapping("/logout")
-    public void logout(HttpServletRequest request) {
-        // getSession(false) 를 사용해야 함 (세션이 없더라도 새로 생성하면 안되기 때문, 없으면 null 반환)
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-    }
 }
 

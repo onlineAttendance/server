@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new UserLoginInterceptor(tokenManager))
                 .order(1) //낮을 수록 먼저 호출
                 .addPathPatterns("/api/users/**") //인터셉터를 적용할 url 패턴
-                .excludePathPatterns("/api/users/images/*", "/css/**", "/*.ico", "/error", "/js/**"); //인터셉터에서 제외할 패턴 지정
+                .excludePathPatterns("/api/users/login", "/api/users/images/*", "/css/**", "/*.ico", "/error", "/js/**"); //인터셉터에서 제외할 패턴 지정
 
         registry.addInterceptor(new AdminLoginInterceptor())
                 .order(2) //낮을 수록 먼저 호출
