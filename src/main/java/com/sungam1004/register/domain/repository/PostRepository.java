@@ -1,11 +1,13 @@
 package com.sungam1004.register.domain.repository;
 
 import com.sungam1004.register.domain.entity.Post;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    //List<Post> findAllOrderByDateAsc();
+    @EntityGraph(attributePaths = {"questions"}, type = EntityGraph.EntityGraphType.LOAD)
+    Optional<Post> findWithQuestionsById(Long id);
 }

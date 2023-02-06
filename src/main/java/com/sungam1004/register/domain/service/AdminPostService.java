@@ -72,11 +72,11 @@ public class AdminPostService {
 
     @Transactional(readOnly = true)
     public PostDetailDto postDetail(Long postId) {
-        Post post = postRepository.findById(postId)
+        Post post = postRepository.findWithQuestionsById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
         PostDetailDto ret = PostDetailDto.of(post);
 
-        List<Question> questions = questionRepository.findByPost(post);
+        List<Question> questions = post.getQuestions();
         for (Question question : questions) {
             ret.getQuestions().add(question.getContent());
         }
@@ -85,11 +85,11 @@ public class AdminPostService {
 
     @Transactional(readOnly = true)
     public EditPostDto editPostFormById(Long postId) {
-        Post post = postRepository.findById(postId)
+        Post post = postRepository.findWithQuestionsById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
         EditPostDto ret = EditPostDto.of(post);
 
-        List<Question> questions = questionRepository.findByPost(post);
+        List<Question> questions = post.getQuestions();
         for (Question question : questions) {
             ret.getQuestions().add(new EditPostDto.Question(question.getOrder(), question.getContent()));
         }
