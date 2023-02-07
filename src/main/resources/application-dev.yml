@@ -1,0 +1,45 @@
+spring:
+
+  datasource:
+    url: ENC(k3BM1rMDX7D3W98yUeyruEynWRrSoa3F9nHKAPcgikSFdzS69BcPg2QTWI+phiHd2lrxE5W9GTBhmV1cRkQfuyOlMIUOm5HrrZootpdpfkxxQKMgfI6hRG1XbhnMF2CinjV5wFWWUTM=)
+    username: ENC(7QvAWkMK35f/UXBxDk7OcQ==)
+    password: ENC(CUe+Ul1+QVveDkjG0Ao5Z1jMI66QnX6T)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true # 실행되는 query를 보여줌
+
+  sql: # data-mysql.sql 을 실행하기 위한 설정입니다.
+    init:
+      platform: mysql
+      mode: always
+
+
+logging.level:
+  org.hibernate.SQL: debug
+
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
+
+file:
+  #path: /workspace/file
+  path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/file
+
+password:
+  attendance: 1234
+  admin: rhksflwk
+
+token:
+  secret: test
+
+image:
+  menu: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
+  #menu: /image/menu/
+  default_filename: default.png

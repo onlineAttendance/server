@@ -17,6 +17,10 @@ spring:
     properties:
       hibernate:
         format_sql: true # 실행되는 query를 보여줌
+  sql: # data-h2.sql 을 실행하기 위한 설정입니다.
+    init:
+      platform: h2
+      mode: always
 
 logging.level:
   org.hibernate.SQL: debug
