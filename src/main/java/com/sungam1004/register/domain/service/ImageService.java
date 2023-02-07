@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -21,13 +20,13 @@ import java.util.UUID;
 @Transactional
 public class ImageService {
 
-    @Value("${image.menu}")
+    @Value("${image.path}")
     private String imagePath;
 
     public String registryImage(MultipartFile faceImageFile) {
         try {
             String imageFullName = createStoreFileName(faceImageFile.getOriginalFilename());
-            faceImageFile.transferTo(new File(imagePath +"/"+imageFullName));
+            faceImageFile.transferTo(new File(imagePath + "/" + imageFullName));
             return imageFullName;
         } catch (IOException e) {
             e.printStackTrace();

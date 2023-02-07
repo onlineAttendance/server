@@ -42,6 +42,6 @@ token:
   secret: test
 
 image:
-  menu: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
-  #menu: /image/menu/
+  #path: /workspace/image
+  path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
   default_filename: default.png
