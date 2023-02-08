@@ -1,7 +1,7 @@
 spring:
 
   datasource:
-    url: ENC(k3BM1rMDX7D3W98yUeyruEynWRrSoa3F9nHKAPcgikSFdzS69BcPg2QTWI+phiHd2lrxE5W9GTBhmV1cRkQfuyOlMIUOm5HrrZootpdpfkxxQKMgfI6hRG1XbhnMF2CinjV5wFWWUTM=)
+    url: ENC(DVE+kSs1XlDkbIb0AFXhxJnvvZ1h0hlfesFuYPFcHnDgGQf6FULjc/TQD1I8/3Mq/6r4Es570d3gv3XCc1AZrOG/EjmB5Q/Hzr82hjbkaSbLgz6+58h+XjMuIU4CXt/di+HBRDMB0azB+yXgOTa37Q==)
     username: ENC(7QvAWkMK35f/UXBxDk7OcQ==)
     password: ENC(CUe+Ul1+QVveDkjG0Ao5Z1jMI66QnX6T)
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,6 +13,7 @@ spring:
     properties:
       hibernate:
         format_sql: true # 실행되는 query를 보여줌
+    show-sql: true
 
   sql: # data-mysql.sql 을 실행하기 위한 설정입니다.
     init:
@@ -21,7 +22,8 @@ spring:
 
 
 logging.level:
-  org.hibernate.SQL: debug
+  org.hibernate:
+    orm.jdbc.bind: trace
 
 server:
   servlet:
@@ -38,6 +40,7 @@ password:
 
 token:
   secret: test
+  access-token-expiration: 7200000 # 2시간
 
 image:
   path: /workspace/image
