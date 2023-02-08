@@ -5,11 +5,18 @@
 </head>
 
 <body>
-  <h1>face image Test</h1>
-  <input type="text" placeholder="Image Stored Url" id="face">
-  <button onclick="chImg(face)">변경하기</button>
+  <h1>face image Test(local)</h1>
+  <input type="text" placeholder="Image Stored Url" id="face1">
+  <button onclick="chImg(face1)">변경하기</button>
   <br>
-  <img src="http://" width="300" id="faceImg">
+  <img src="http://" width="300" id="face1Img">
+
+
+  <h1>face image Test(server)</h1>
+  <input type="text" placeholder="Image Stored Url" id="face2">
+  <button onclick="chImg2(face2)">변경하기</button>
+  <br>
+  <img src="http://" width="300" id="face2Img">
 
 
 <script type="text/javascript">
@@ -17,6 +24,11 @@
     const target = tg.id;
     const name = tg.value;
     document.getElementById(target+"Img").src = "http://localhost:8080/api/users/images/"+name;
+  }
+  function chImg2(tg) {
+    const target = tg.id;
+    const name = tg.value;
+    document.getElementById(target+"Img").src = "http://attendance-hsk4991149.koyeb.app/api/users/images/"+name;
   }
 </script>
 </body>
