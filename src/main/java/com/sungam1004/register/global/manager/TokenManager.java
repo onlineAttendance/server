@@ -9,9 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Component
 @RequiredArgsConstructor
@@ -20,6 +18,9 @@ public class TokenManager {
 
     @Value("${token.secret}")
     private String tokenSecret;
+
+    @Value("${token.access-token-expiration}")
+    private String accessTokenExpiration;
 
     public TokenDto createTokenDto(Long userId) {
         String accessToken = createAccessToken(userId);
@@ -34,7 +35,7 @@ public class TokenManager {
                 .setSubject("accessToken")
                 .setAudience(String.valueOf(userId))
                 .setIssuedAt(new Date())
-                .setExpiration(new GregorianCalendar(2023, Calendar.DECEMBER, 31).getTime())
+                .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(accessTokenExpiration)))
                 .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .setHeaderParam("typ", "JWT")
                 .compact();

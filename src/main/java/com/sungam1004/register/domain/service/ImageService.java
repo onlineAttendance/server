@@ -23,8 +23,12 @@ public class ImageService {
     @Value("${image.path}")
     private String imagePath;
 
+    @Value("${image.default_filename}")
+    private String defaultImageName;
+
     public String registryImage(MultipartFile faceImageFile) {
         try {
+            if (faceImageFile.isEmpty()) return defaultImageName;
             String imageFullName = createStoreFileName(faceImageFile.getOriginalFilename());
             faceImageFile.transferTo(new File(imagePath + "/" + imageFullName));
             return imageFullName;

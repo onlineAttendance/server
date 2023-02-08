@@ -17,13 +17,17 @@ spring:
     properties:
       hibernate:
         format_sql: true # 실행되는 query를 보여줌
+    show-sql: true
+
   sql: # data-h2.sql 을 실행하기 위한 설정입니다.
     init:
       platform: h2
       mode: always
 
+
 logging.level:
-  org.hibernate.SQL: debug
+  org.hibernate:
+    orm.jdbc.bind: trace
 
 server:
   servlet:
@@ -40,6 +44,7 @@ password:
 
 token:
   secret: test
+  access-token-expiration: 7200000 # 2시간
 
 image:
   #path: /workspace/image
