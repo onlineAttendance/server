@@ -29,13 +29,6 @@ public class AdminService {
     private final UserRepository userRepository;
     private final AttendanceRepository attendanceRepository;
 
-    public void addUser(AddUserDto.Request requestDto, String faceImageUri) {
-        if (userRepository.existsByName(requestDto.getName()))
-            throw new CustomException(ErrorCode.DUPLICATE_USER_NAME);
-        User user = requestDto.toEntity(faceImageUri);
-        userRepository.save(user);
-    }
-
     @Transactional(readOnly = true)
     public List<UserManagerDto> findUserAll() {
         return userRepository.findAll().stream()

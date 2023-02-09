@@ -3,6 +3,9 @@ package com.sungam1004.register.domain.controller.admin;
 import com.sungam1004.register.domain.dto.AddUserDto;
 import com.sungam1004.register.domain.entity.Team;
 import com.sungam1004.register.domain.service.ImageService;
+import com.sungam1004.register.domain.service.UserSignupService;
+import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ErrorCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +16,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.sungam1004.register.domain.service.AdminService;
-import com.sungam1004.register.global.exception.CustomException;
-import com.sungam1004.register.global.exception.ErrorCode;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("admin/manager/add")
 @Slf4j
-public class AdminAddUserController {
+public class AdminSignupUserController {
 
-    private final AdminService adminService;
+    private final UserSignupService userSignupService;
     private final ImageService imageService;
 
     @GetMapping
@@ -43,7 +43,7 @@ public class AdminAddUserController {
         }
         try {
             String faceImageUri = imageService.registryImage(faceImageFile);
-            adminService.addUser(requestDto, faceImageUri);
+            userSignupService.addUser(requestDto, faceImageUri);
         } catch (CustomException e) {
             if (e.getError() == ErrorCode.DUPLICATE_USER_NAME) {
                 bindingResult.rejectValue("name", "0", e.getMessage());
