@@ -20,6 +20,11 @@ spring:
       platform: mysql
       mode: always
 
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+
 
 logging.level:
   org.hibernate:

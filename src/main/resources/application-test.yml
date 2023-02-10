@@ -24,10 +24,15 @@ spring:
       platform: h2
       mode: always
 
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
 
 logging.level:
   org.hibernate:
     orm.jdbc.bind: trace
+  org.apache.coyote.http11: debug
 
 server:
   servlet:
@@ -50,3 +55,4 @@ image:
   #path: /workspace/image
   path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
   default_filename: default.png
+
