@@ -56,3 +56,6 @@ image:
   path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
   default_filename: default.png
 
+jasypt:
+  encryptor:
+    password: test

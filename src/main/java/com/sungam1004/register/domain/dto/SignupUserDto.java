@@ -2,8 +2,10 @@ package com.sungam1004.register.domain.dto;
 
 import com.sungam1004.register.domain.entity.Team;
 import com.sungam1004.register.domain.entity.User;
+import com.sungam1004.register.global.validation.annotation.TeamValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class SignupUserDto {
 
     @NotBlank(message = "이름은 필수입니다.")
+    @Size(max = 10, message = "이름은 최대 {max}자리 이하입니다.")
     private String name;
 
     @Pattern(regexp = "^[0-9]{4}$", message = "비밀번호는 숫자 4자리입니다.")
@@ -23,6 +26,7 @@ public class SignupUserDto {
     private String birth;
 
     @NotBlank(message = "팀 선택은 필수입니다.")
+    @TeamValid
     private String team;
 
     @NotBlank(message = "faceImageFile은 필수입니다.")

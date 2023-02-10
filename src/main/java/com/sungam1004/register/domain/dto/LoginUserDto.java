@@ -14,7 +14,7 @@ public class LoginUserDto {
     @AllArgsConstructor
     public static class Request {
 
-        @NotBlank
+        @NotBlank(message = "이름은 필수입니다.")
         @Size(max = 10, message = "이름은 최대 {max}자리 이하입니다.")
         private String name;
 

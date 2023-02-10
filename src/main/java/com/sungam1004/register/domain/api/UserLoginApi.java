@@ -2,8 +2,6 @@ package com.sungam1004.register.domain.api;
 
 import com.sungam1004.register.domain.dto.LoginUserDto;
 import com.sungam1004.register.domain.service.UserLoginService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
