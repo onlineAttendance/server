@@ -34,13 +34,13 @@ class UserSignupApiTest {
     private ObjectMapper objectMapper; // 스프링에서 자동으로 주입해줌
 
     @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private UserSignupService userSignupService;
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @Test
     @DisplayName("유저 회원가입")
