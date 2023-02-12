@@ -34,7 +34,7 @@ class UserLoginApiTest {
 
     @Autowired
     private UserSignupService userSignupService;
-    
+
     @Test
     @DisplayName("로그인 성공")
     void login() throws Exception {
