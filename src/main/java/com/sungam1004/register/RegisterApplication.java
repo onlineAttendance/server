@@ -1,5 +1,6 @@
 package com.sungam1004.register;
 
+import com.sungam1004.register.global.manager.BuildTime;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ public class RegisterApplication {
     public void setTimeZone() {
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
         System.out.println("현재시각 : " + LocalDateTime.now());
+        BuildTime.buildTime = LocalDateTime.now().toString();
     }
 
 }

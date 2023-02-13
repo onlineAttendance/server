@@ -6,7 +6,7 @@ import java.util.List;
 
 
 @Slf4j
-public class SundayDateManager {
+public class SundayDate {
     public static final List<String> date =
             List.of("2023-01-01",
                     "2023-01-08",

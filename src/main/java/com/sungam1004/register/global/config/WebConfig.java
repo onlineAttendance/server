@@ -42,7 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // "/"로 Get 요청이 들어오면, "home" view를 반환
-        registry.addViewController("/").setViewName("home");
         registry.addViewController("/admin").setViewName("admin/adminHome");
     }
 

@@ -7,7 +7,7 @@ import com.sungam1004.register.domain.repository.PostRepository;
 import com.sungam1004.register.domain.repository.QuestionRepository;
 import com.sungam1004.register.global.exception.CustomException;
 import com.sungam1004.register.global.exception.ErrorCode;
-import com.sungam1004.register.global.manager.SundayDateManager;
+import com.sungam1004.register.global.manager.SundayDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +34,7 @@ public class AdminPostService {
     public List<PostManagerDto> findPostList() {
         List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
         List<PostManagerDto> ret = new ArrayList<>();
-        List<String> dates = SundayDateManager.date;
+        List<String> dates = SundayDate.date;
 
         int listPoint = 0;
         for (String date : dates) {
@@ -127,7 +127,6 @@ public class AdminPostService {
         // Sort.by(정렬기준): 기본적으로 오름차순으로 정렬
         Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "date"));
         return postRepository.findAll(pageable).stream()
-                //.map(post -> PostResponse(post.getId(), post.getTitle(), post.getContent())
                 .map(PostResponseDto::of)
                 .collect(Collectors.toList());
     }

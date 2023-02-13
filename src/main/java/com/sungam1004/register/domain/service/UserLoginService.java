@@ -12,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -23,15 +21,13 @@ public class UserLoginService {
 
     @Transactional(readOnly = true)
     public LoginUserDto.Response loginUser(LoginUserDto.Request requestDto) {
-        Optional<User> optionalUser = userRepository.findByName(requestDto.getName());
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            String phone = user.getPassword();
-            String result = phone.substring(phone.length() - 4);
-            if (requestDto.getPassword().equals(result)) {
-                TokenDto tokenDto = tokenManager.createTokenDto(user.getId());
-                return LoginUserDto.Response.of(tokenDto);
-            }
+        User user = userRepository.findByName(requestDto.getName())
+                .orElseThrow(() -> new CustomException(ErrorCode.FAIL_LOGIN));
+
+        String userPassword = user.getPassword();
+        if (requestDto.getPassword().equals(userPassword)) {
+            TokenDto tokenDto = tokenManager.createTokenDto(user.getId());
+            return LoginUserDto.Response.of(tokenDto);
         }
         throw new CustomException(ErrorCode.FAIL_LOGIN);
     }
