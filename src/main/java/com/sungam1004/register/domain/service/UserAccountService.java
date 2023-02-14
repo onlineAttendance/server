@@ -1,5 +1,6 @@
 package com.sungam1004.register.domain.service;
 
+import com.sungam1004.register.domain.entity.Team;
 import com.sungam1004.register.domain.entity.User;
 import com.sungam1004.register.domain.repository.UserRepository;
 import com.sungam1004.register.global.exception.CustomException;
@@ -27,5 +28,11 @@ public class UserAccountService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
         user.changeFaceImageUri(faceImageUri);
+    }
+
+    public Team findTeam(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+        return user.getTeam();
     }
 }

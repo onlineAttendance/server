@@ -30,7 +30,7 @@ public class AttendanceService {
     private final UserRepository userRepository;
     private final PasswordManager passwordManager;
 
-    public String saveAttendance(Long userId, String password) {
+    public Team saveAttendance(Long userId, String password) {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
             throw new CustomException(ErrorCode.INCORRECT_PASSWORD);
         }
@@ -47,7 +47,7 @@ public class AttendanceService {
         attendanceRepository.save(attendance);
         user.increaseAttendanceNumber();
         log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
-        return user.getTeam().toString();
+        return user.getTeam();
     }
 
     private boolean validSunday() {
@@ -56,11 +56,10 @@ public class AttendanceService {
     }
 
     @Transactional(readOnly = true)
-    public AttendanceDto.Response findTodayAttendanceByTeam(String strTeam) {
-        Team team = Team.convertTeamByString(strTeam);
+    public AttendanceDto.Response findTodayAttendanceByTeam(Team team) {
         List<User> users = userRepository.findByTeam(team);
 
-        AttendanceDto.Response response = new AttendanceDto.Response(strTeam);
+        AttendanceDto.Response response = new AttendanceDto.Response(team.name());
         LocalDateTime startDatetime = LocalDate.now().atStartOfDay();
         for (User user : users) {
             boolean isAttendance = attendanceRepository.existsByUserAndCreatedAtAfter(user, startDatetime);
