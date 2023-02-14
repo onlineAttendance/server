@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,7 +50,7 @@ class AttendanceApiTest {
 
     @Test
     @DisplayName("출석")
-    void changePassword() throws Exception {
+    void attendanceSuccess() throws Exception {
         // given
         SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
         userSignupService.addUser(signupUserDto);
@@ -75,5 +76,25 @@ class AttendanceApiTest {
         assertThat(optionalUser.isPresent()).isEqualTo(true);
         User user = optionalUser.get();
         assertThat(user.getAttendanceNumber()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("팀의 출석 현황 확인")
+    void findTeamAttendance() throws Exception {
+        // given
+        SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
+        userSignupService.addUser(signupUserDto);
+        String accessToken = userLoginService.loginUser(new LoginUserDto.Request("tester", "1234")).getToken();
+
+        // expected
+        mockMvc.perform(get("/api/users/attendances")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer " + accessToken)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.team").value("복통"))
+                .andExpect(jsonPath("$.notAttendance").exists())
+                .andExpect(jsonPath("$.attendance").isEmpty())
+                .andDo(print());
     }
 }
