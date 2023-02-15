@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.dto;
 
-import jakarta.validation.constraints.Pattern;
+import com.sungam1004.register.global.validation.annotation.UserPasswordValid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChangeUserPasswordDto {
-    @Pattern(regexp = "^[0-9]{4}$", message = "비밀번호는 숫자 4자리입니다.")
+    @UserPasswordValid
     private String password;
 }

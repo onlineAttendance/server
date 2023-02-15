@@ -1,22 +1,22 @@
 package com.sungam1004.register.global.validation.annotation;
 
-import com.sungam1004.register.global.validation.validator.DateValidator;
+import com.sungam1004.register.global.validation.validator.UserPasswordValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = DateValidator.class)
+@Constraint(validatedBy = UserPasswordValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DateValid {
+public @interface UserPasswordValid {
 
-    String message() default "yyyy.MM.dd. 형식이어야 합니다.";
+    String message() default "비밀번호는 숫자 4자리입니다.";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String pattern() default "yyyy.MM.dd.";
+    String pattern() default "[0-9][0-9][0-9][0-9]";
 }

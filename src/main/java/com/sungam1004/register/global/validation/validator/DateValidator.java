@@ -23,6 +23,9 @@ public class DateValidator implements ConstraintValidator<DateValid, String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
         try {
+            if (pattern.equals("[0-9][0-9].[0-9][0-9].[0-9][0-9].")) {
+                return value.matches(pattern);
+            }
             LocalDate.from(LocalDate.parse(value, DateTimeFormatter.ofPattern(this.pattern)));
         } catch (DateTimeParseException e) {
             log.error("DateValidator :", e);
