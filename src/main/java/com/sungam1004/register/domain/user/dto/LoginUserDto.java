@@ -3,15 +3,13 @@ package com.sungam1004.register.domain.user.dto;
 import com.sungam1004.register.global.validation.annotation.UserPasswordValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 public class LoginUserDto {
 
-    @Data
-    @NoArgsConstructor
     @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @Getter
     public static class Request {
 
         @NotBlank(message = "이름은 필수입니다.")
@@ -22,9 +20,9 @@ public class LoginUserDto {
         private String password;
     }
 
-    @Data
-    @NoArgsConstructor
     @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @Getter
     public static class Response {
 
         private String token;

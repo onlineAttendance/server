@@ -93,8 +93,8 @@ class UserLoginApiTest {
                         .content(content)
                 )
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.code").value(ErrorCode.FAIL_LOGIN.getCode()))
-                .andExpect(jsonPath("$.message").value(ErrorCode.FAIL_LOGIN.getMessage()))
+                .andExpect(jsonPath("$.code").value(ErrorCode.NOT_FOUND_USER.getCode()))
+                .andExpect(jsonPath("$.message").value(ErrorCode.NOT_FOUND_USER.getMessage()))
                 .andDo(print());
     }
 }

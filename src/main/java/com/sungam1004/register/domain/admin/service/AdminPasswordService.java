@@ -1,4 +1,4 @@
-package com.sungam1004.register.domain.admin;
+package com.sungam1004.register.domain.admin.service;
 
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;

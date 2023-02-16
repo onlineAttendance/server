@@ -1,4 +1,4 @@
-package com.sungam1004.register.domain.admin;
+package com.sungam1004.register.domain.admin.service;
 
 import com.sungam1004.register.domain.admin.dto.StatisticsDto;
 import com.sungam1004.register.domain.attendance.entity.Attendance;

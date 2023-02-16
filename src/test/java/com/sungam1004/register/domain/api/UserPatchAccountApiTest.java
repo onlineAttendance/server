@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class UserAccountApiTest {
+class UserPatchAccountApiTest {
 
     @Autowired
     private ObjectMapper objectMapper; // 스프링에서 자동으로 주입해줌
@@ -54,7 +54,7 @@ class UserAccountApiTest {
         userSignupService.addUser(signupUserDto);
 
         String accessToken = userLoginService.loginUser(new LoginUserDto.Request("tester", "1234")).getToken();
-        ChangeUserPasswordDto loginDto = new ChangeUserPasswordDto("4321");
+        ChangeUserPasswordDto.Request loginDto = new ChangeUserPasswordDto.Request("4321");
         String content = objectMapper.writeValueAsString(loginDto);
 
         // expected

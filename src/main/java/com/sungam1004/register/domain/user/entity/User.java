@@ -45,11 +45,11 @@ public class User {
         attendanceNumber--;
     }
 
-    public void changeFaceImageUri(String faceImageUri) {
+    public void updateFaceImageUri(String faceImageUri) {
         this.faceImageUri = faceImageUri;
     }
 
-    public void changeUserPassword(String password) {
+    public void updateUserPassword(String password) {
         this.password = password;
     }
 

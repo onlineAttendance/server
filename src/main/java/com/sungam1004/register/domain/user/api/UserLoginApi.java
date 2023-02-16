@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserLoginApi {
     private final UserLoginService userLoginService;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public LoginUserDto.Response loginUser(@Valid @RequestBody LoginUserDto.Request requestDto) {
         return userLoginService.loginUser(requestDto);
     }

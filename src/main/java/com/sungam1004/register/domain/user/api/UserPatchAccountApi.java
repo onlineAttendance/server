@@ -2,7 +2,7 @@ package com.sungam1004.register.domain.user.api;
 
 import com.sungam1004.register.domain.user.dto.ChangeUserPasswordDto;
 import com.sungam1004.register.domain.image.application.ImageService;
-import com.sungam1004.register.domain.user.application.UserAccountService;
+import com.sungam1004.register.domain.user.application.UserPatchAccountService;
 import com.sungam1004.register.global.resolver.UserId;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,19 +17,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RequestMapping("api/users/account")
 @Slf4j
-public class UserAccountApi {
-    private final UserAccountService userAccountService;
+public class UserPatchAccountApi {
+    private final UserPatchAccountService userPatchAccountService;
     private final ImageService imageService;
 
     @PatchMapping("password")
-    public void changeUserPassword(@UserId Long userId, @Valid @RequestBody ChangeUserPasswordDto requestDto) {
-        userAccountService.changePassword(userId, requestDto.getPassword());
+    public void changeUserPassword(@UserId Long userId, @Valid @RequestBody ChangeUserPasswordDto.Request requestDto) {
+        userPatchAccountService.changePassword(userId, requestDto.getPassword());
     }
 
     @PatchMapping("images")
     public void loginUser(@UserId Long userId, MultipartFile faceImageFile) {
         String faceImageUri = imageService.registryImage(faceImageFile);
-        userAccountService.changeFaceImage(userId, faceImageUri);
+        userPatchAccountService.changeFaceImage(userId, faceImageUri);
     }
 }
 

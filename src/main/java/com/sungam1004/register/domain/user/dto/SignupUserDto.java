@@ -23,7 +23,7 @@ public class SignupUserDto {
     @UserPasswordValid
     private String password;
 
-    @DateValid(pattern = "yy.MM.dd.", message = "생년월일은 YY.MM.DD. ㅁ형식으로 입력해야 합니다.")
+    @DateValid(pattern = "yy.MM.dd.", message = "생년월일은 YY.MM.DD. 형식으로 입력해야 합니다.")
     private String birth;
 
     @TeamValid
@@ -38,7 +38,7 @@ public class SignupUserDto {
                 .birth(birth)
                 .password(password)
                 .faceImageUri(faceImageFile)
-                .team(Team.convertTeamByString(team))
+                .team(Team.valueOf(team))
                 .build();
     }
 }
