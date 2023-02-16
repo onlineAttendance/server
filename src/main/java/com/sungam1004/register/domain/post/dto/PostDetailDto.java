@@ -1,16 +1,14 @@
 package com.sungam1004.register.domain.post.dto;
 
 import com.sungam1004.register.domain.post.entity.Post;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class PostDetailDto {
 
     private Long postId;
