@@ -2,7 +2,7 @@ package com.sungam1004.register.domain.attendance.controller;
 
 import com.sungam1004.register.domain.attendance.application.AttendanceService;
 import com.sungam1004.register.domain.attendance.dto.AttendancePasswordDto;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class AdminAttendancePasswordController {
         }
         try {
             attendanceService.changeUserPassword(requestDto.getPassword());
-        } catch (CustomException e) {
+        } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());
             }

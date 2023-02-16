@@ -3,10 +3,10 @@ package com.sungam1004.register.global.exception;
 import lombok.Getter;
 
 @Getter
-public class CustomException extends RuntimeException {
+public class ApplicationException extends RuntimeException {
     private final ErrorCode error;
 
-    public CustomException(ErrorCode e) {
+    public ApplicationException(ErrorCode e) {
         super(e.getMessage());
         this.error = e;
     }

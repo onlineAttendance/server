@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.image.application;
 
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class ImageService {
             return imageFullName;
         } catch (IOException e) {
             e.printStackTrace();
-            throw new CustomException(ErrorCode.FAIL_STORE_IMAGE);
+            throw new ApplicationException(ErrorCode.FAIL_STORE_IMAGE);
         }
     }
 
@@ -54,7 +54,7 @@ public class ImageService {
             return new UrlResource("file:" + imagePath + "/" + fileName);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomException(ErrorCode.FAIL_CALL_IMAGE);
+            throw new ApplicationException(ErrorCode.FAIL_CALL_IMAGE);
         }
     }
 }

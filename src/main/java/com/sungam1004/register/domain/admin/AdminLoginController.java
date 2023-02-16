@@ -1,7 +1,7 @@
 package com.sungam1004.register.domain.admin;
 
 import com.sungam1004.register.domain.admin.dto.LoginAdminDto;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +36,7 @@ public class AdminLoginController {
 
         try {
             adminPasswordService.loginAdmin(requestDto.getPassword());
-        } catch (CustomException e) {
+        } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.INCORRECT_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());
             }

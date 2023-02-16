@@ -3,7 +3,7 @@ package com.sungam1004.register.domain.user.application;
 import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,20 +19,20 @@ public class UserAccountService {
 
     public void changePassword(Long userId, String password) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
         user.changeUserPassword(password);
     }
 
 
     public void changeFaceImage(Long userId, String faceImageUri) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
         user.changeFaceImageUri(faceImageUri);
     }
 
     public Team findTeam(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
         return user.getTeam();
     }
 }

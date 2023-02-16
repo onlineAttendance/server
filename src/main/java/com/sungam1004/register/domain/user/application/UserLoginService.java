@@ -4,7 +4,7 @@ import com.sungam1004.register.domain.user.dto.LoginUserDto;
 import com.sungam1004.register.domain.user.dto.TokenDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.TokenManager;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +22,13 @@ public class UserLoginService {
     @Transactional(readOnly = true)
     public LoginUserDto.Response loginUser(LoginUserDto.Request requestDto) {
         User user = userRepository.findByName(requestDto.getName())
-                .orElseThrow(() -> new CustomException(ErrorCode.FAIL_LOGIN));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.FAIL_LOGIN));
 
         String userPassword = user.getPassword();
         if (requestDto.getPassword().equals(userPassword)) {
             TokenDto tokenDto = tokenManager.createTokenDto(user.getId());
             return LoginUserDto.Response.of(tokenDto);
         }
-        throw new CustomException(ErrorCode.FAIL_LOGIN);
+        throw new ApplicationException(ErrorCode.FAIL_LOGIN);
     }
 }

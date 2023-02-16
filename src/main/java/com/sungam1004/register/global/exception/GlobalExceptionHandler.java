@@ -52,8 +52,8 @@ public class GlobalExceptionHandler {
         return ErrorResponse.toResponseEntity(ErrorCode.ACCESS_DENIED);
     }
 
-    @ExceptionHandler(CustomException.class)
-    protected ResponseEntity<?> handleBusinessException(final CustomException e) {
+    @ExceptionHandler(ApplicationException.class)
+    protected ResponseEntity<?> handleBusinessException(final ApplicationException e) {
         log.error("CustomException", e);
         return ErrorResponse.toResponseEntity(e.getError());
     }

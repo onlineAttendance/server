@@ -4,7 +4,7 @@ import com.sungam1004.register.domain.user.dto.AddUserDto;
 import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.image.application.ImageService;
 import com.sungam1004.register.domain.user.application.UserSignupService;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class AdminSignupUserController {
         try {
             String faceImageUri = imageService.registryImage(faceImageFile);
             userSignupService.addUser(requestDto, faceImageUri);
-        } catch (CustomException e) {
+        } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.DUPLICATE_USER_NAME) {
                 bindingResult.rejectValue("name", "0", e.getMessage());
             }

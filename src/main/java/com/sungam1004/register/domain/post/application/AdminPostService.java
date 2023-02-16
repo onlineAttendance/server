@@ -5,7 +5,7 @@ import com.sungam1004.register.domain.post.entity.Post;
 import com.sungam1004.register.domain.question.entity.Question;
 import com.sungam1004.register.domain.post.repository.PostRepository;
 import com.sungam1004.register.domain.question.repository.QuestionRepository;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.SundayDate;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +73,7 @@ public class AdminPostService {
     @Transactional(readOnly = true)
     public PostDetailDto postDetail(Long postId) {
         Post post = postRepository.findWithQuestionsById(postId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_POST));
         PostDetailDto ret = PostDetailDto.of(post);
 
         List<Question> questions = post.getQuestions();
@@ -86,7 +86,7 @@ public class AdminPostService {
     @Transactional(readOnly = true)
     public EditPostDto editPostFormById(Long postId) {
         Post post = postRepository.findWithQuestionsById(postId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_POST));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_POST));
         EditPostDto ret = EditPostDto.of(post);
 
         List<Question> questions = post.getQuestions();

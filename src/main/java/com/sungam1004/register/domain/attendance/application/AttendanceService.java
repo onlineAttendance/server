@@ -6,7 +6,7 @@ import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.PasswordManager;
 import lombok.RequiredArgsConstructor;
@@ -35,15 +35,15 @@ public class AttendanceService {
 
     public Team saveAttendance(Long userId, String password) {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
-            throw new CustomException(ErrorCode.INCORRECT_PASSWORD);
+            throw new ApplicationException(ErrorCode.INCORRECT_PASSWORD);
         }
         //if (!validSunday()) throw new CustomException(ErrorCode.INVALID_DAY_OF_WEEK);
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
 
         if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
-            throw new CustomException(ErrorCode.DUPLICATE_ATTENDANCE);
+            throw new ApplicationException(ErrorCode.DUPLICATE_ATTENDANCE);
         }
 
         Attendance attendance = new Attendance(user);
@@ -77,7 +77,7 @@ public class AttendanceService {
 
     public void toggleAttendance(Long userId, String strDate) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
         LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
 
         Optional<Attendance> optionalAttendance

@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.user.entity;
 
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public enum Team {
         try {
             return Team.valueOf(strTeam);
         } catch (IllegalArgumentException e) {
-            throw new CustomException(ErrorCode.NOT_FOUND_TEAM);
+            throw new ApplicationException(ErrorCode.NOT_FOUND_TEAM);
         }
     }
 }

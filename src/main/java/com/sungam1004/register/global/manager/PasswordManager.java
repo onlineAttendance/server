@@ -1,6 +1,6 @@
 package com.sungam1004.register.global.manager;
 
-import com.sungam1004.register.global.exception.CustomException;
+import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class PasswordManager {
         if (Pattern.matches("^[0-9]{4}$", nPassword)) {
             attendancePassword = nPassword;
         }
-        else throw new CustomException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD);
+        else throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD);
     }
 
     public Boolean isCorrectAttendancePassword(String nPassword) {
@@ -32,7 +32,7 @@ public class PasswordManager {
         if (nPassword.length() >= 5 && nPassword.length() <= 20) {
             adminPassword = nPassword;
         }
-        else throw new CustomException(ErrorCode.NOT_FORMAT_MATCH_ADMIN_PASSWORD);
+        else throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_ADMIN_PASSWORD);
     }
 
     public Boolean isCorrectAdminPassword(String nPassword) {
