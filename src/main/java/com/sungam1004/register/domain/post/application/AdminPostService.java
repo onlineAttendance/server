@@ -2,11 +2,10 @@ package com.sungam1004.register.domain.post.application;
 
 import com.sungam1004.register.domain.post.dto.*;
 import com.sungam1004.register.domain.post.entity.Post;
-import com.sungam1004.register.domain.question.entity.Question;
+import com.sungam1004.register.domain.post.exception.PostNotFoundException;
 import com.sungam1004.register.domain.post.repository.PostRepository;
+import com.sungam1004.register.domain.question.entity.Question;
 import com.sungam1004.register.domain.question.repository.QuestionRepository;
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.SundayDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,19 +33,27 @@ public class AdminPostService {
     public List<PostManagerDto> findPostList() {
         List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
         List<PostManagerDto> ret = new ArrayList<>();
-        List<String> dates = SundayDate.date;
+        List<String> dates = SundayDate.dates;
 
         int listPoint = 0;
         for (String date : dates) {
             if (posts.size() > listPoint) {
                 Post post = posts.get(listPoint);
                 if (post.getDate().equals(LocalDate.parse(date, DateTimeFormatter.ISO_DATE))) {
-                    ret.add(new PostManagerDto(post.getId(), post.getTitle(), date, true));
+                    ret.add(PostManagerDto.builder()
+                            .id(post.getId())
+                            .title(post.getTitle())
+                            .date(date)
+                            .isExist(true)
+                            .build());
                     listPoint++;
                     continue;
                 }
             }
-            ret.add(new PostManagerDto(0L, "", date, false));
+            ret.add(PostManagerDto.builder()
+                    .date(date)
+                    .isExist(false)
+                    .build());
         }
 
         return ret;
@@ -72,21 +79,13 @@ public class AdminPostService {
 
     @Transactional(readOnly = true)
     public PostDetailDto postDetail(Long postId) {
-        Post post = postRepository.findWithQuestionsById(postId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_POST));
-        PostDetailDto ret = PostDetailDto.of(post);
-
-        List<Question> questions = post.getQuestions();
-        for (Question question : questions) {
-            ret.getQuestions().add(question.getContent());
-        }
-        return ret;
+        Post post = postRepository.findWithQuestionsById(postId).orElseThrow(PostNotFoundException::new);
+        return PostDetailDto.of(post);
     }
 
     @Transactional(readOnly = true)
     public EditPostDto editPostFormById(Long postId) {
-        Post post = postRepository.findWithQuestionsById(postId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_POST));
+        Post post = postRepository.findWithQuestionsById(postId).orElseThrow(PostNotFoundException::new);
         EditPostDto ret = EditPostDto.of(post);
 
         List<Question> questions = post.getQuestions();

@@ -31,12 +31,15 @@ public class PostDetailDto {
     }
 
     public static PostDetailDto of(Post post) {
-        return PostDetailDto.builder()
+        PostDetailDto ret = PostDetailDto.builder()
                 .content(post.getContent())
                 .title(post.getTitle())
                 .date(post.getDate().format(DateTimeFormatter.ISO_DATE))
                 .postId(post.getId())
                 .build();
+        post.getQuestions()
+                .forEach(question -> ret.getQuestions().add(question.getContent()));
+        return ret;
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Slf4j
 public class SundayDate {
-    public static final List<String> date =
+    public static final List<String> dates =
             List.of("2023-01-01",
                     "2023-01-08",
                     "2023-01-15",

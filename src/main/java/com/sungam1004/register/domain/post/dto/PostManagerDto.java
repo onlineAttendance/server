@@ -1,12 +1,9 @@
 package com.sungam1004.register.domain.post.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class PostManagerDto {
 
     private Long id;
@@ -14,4 +11,12 @@ public class PostManagerDto {
 
     private String date;
     private Boolean isExist;
+
+    @Builder
+    public PostManagerDto(Long id, String title, String date, Boolean isExist) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.isExist = isExist;
+    }
 }
