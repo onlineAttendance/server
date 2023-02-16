@@ -6,16 +6,14 @@ import com.sungam1004.register.global.validation.annotation.DateValid;
 import com.sungam1004.register.global.validation.annotation.TeamValid;
 import com.sungam1004.register.global.validation.annotation.UserPasswordValid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 public class AddUserDto {
 
 
-    @Data
-    @NoArgsConstructor
     @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
     public static class Request {
         @NotBlank(message = "이름은 필수입니다.")
         private String name;

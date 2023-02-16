@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RequestMapping("admin/manager/add")
 @Slf4j
-public class AdminSignupUserController {
+public class AdminAddUserController {
 
     private final UserSignupService userSignupService;
     private final ImageService imageService;

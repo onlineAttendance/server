@@ -7,13 +7,11 @@ import com.sungam1004.register.global.validation.annotation.TeamValid;
 import com.sungam1004.register.global.validation.annotation.UserPasswordValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class SignupUserDto {
 
     @NotBlank(message = "이름은 필수입니다.")

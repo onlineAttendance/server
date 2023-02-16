@@ -1,14 +1,13 @@
 package com.sungam1004.register.domain.user.application;
 
+import com.sungam1004.register.domain.admin.dto.StatisticsDto;
 import com.sungam1004.register.domain.attendance.entity.Attendance;
 import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
-import com.sungam1004.register.domain.admin.dto.StatisticsDto;
 import com.sungam1004.register.domain.user.dto.UserDetailDto;
 import com.sungam1004.register.domain.user.dto.UserManagerDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,8 +36,7 @@ public class UserManageService {
 
     @Transactional(readOnly = true)
     public UserDetailDto userDetail(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
+        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
 
         StatisticsDto statistics = new StatisticsDto();
         statistics.setName(List.of(user));
