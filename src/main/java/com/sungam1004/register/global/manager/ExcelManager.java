@@ -1,7 +1,7 @@
 package com.sungam1004.register.global.manager;
 
-import com.sungam1004.register.domain.entity.Team;
-import com.sungam1004.register.domain.dto.StatisticsDto;
+import com.sungam1004.register.domain.user.entity.Team;
+import com.sungam1004.register.domain.admin.dto.StatisticsDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

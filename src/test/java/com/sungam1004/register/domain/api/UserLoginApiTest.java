@@ -1,9 +1,9 @@
 package com.sungam1004.register.domain.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sungam1004.register.domain.dto.LoginUserDto;
-import com.sungam1004.register.domain.dto.SignupUserDto;
-import com.sungam1004.register.domain.service.UserSignupService;
+import com.sungam1004.register.domain.user.dto.LoginUserDto;
+import com.sungam1004.register.domain.user.dto.SignupUserDto;
+import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.global.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

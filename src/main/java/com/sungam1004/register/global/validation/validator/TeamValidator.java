@@ -1,6 +1,6 @@
 package com.sungam1004.register.global.validation.validator;
 
-import com.sungam1004.register.domain.entity.Team;
+import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.global.validation.annotation.TeamValid;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

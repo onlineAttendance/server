@@ -1,6 +1,6 @@
 package com.sungam1004.register.global.manager;
 
-import com.sungam1004.register.domain.dto.TokenDto;
+import com.sungam1004.register.domain.user.dto.TokenDto;
 import com.sungam1004.register.global.exception.AuthenticationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import io.jsonwebtoken.*;
