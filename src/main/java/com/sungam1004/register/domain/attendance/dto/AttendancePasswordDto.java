@@ -1,15 +1,13 @@
 package com.sungam1004.register.domain.attendance.dto;
 
 import com.sungam1004.register.global.validation.annotation.AttendancePasswordValid;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 public class AttendancePasswordDto {
 
-    @Data
-    @NoArgsConstructor
     @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
     public static class Request {
 
         @AttendancePasswordValid

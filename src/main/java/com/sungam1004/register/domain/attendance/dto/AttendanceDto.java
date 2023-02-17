@@ -1,25 +1,25 @@
 package com.sungam1004.register.domain.attendance.dto;
 
 import com.sungam1004.register.global.validation.annotation.AttendancePasswordValid;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AttendanceDto {
 
-    @Data
-    @NoArgsConstructor
     @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @Getter
     public static class Request {
 
         @AttendancePasswordValid
         private String password;
     }
 
-    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @Getter
     public static class Response {
 
         private String team;
@@ -35,9 +35,9 @@ public class AttendanceDto {
             else notAttendance.add(new Person(name, imageFileName));
         }
 
-        @Data
-        @NoArgsConstructor
         @AllArgsConstructor
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        @Getter
         private static class Person {
             private String name;
             private String imageFileName;

@@ -2,9 +2,12 @@ package com.sungam1004.register.domain.attendance.application;
 
 import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
 import com.sungam1004.register.domain.attendance.entity.Attendance;
+import com.sungam1004.register.domain.attendance.exception.DuplicateAttendanceException;
+import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
+import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
 import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
-import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
+import com.sungam1004.register.domain.user.exception.UserNotFoundException;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
@@ -35,15 +38,14 @@ public class AttendanceService {
 
     public Team saveAttendance(Long userId, String password) {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
-            throw new ApplicationException(ErrorCode.INCORRECT_PASSWORD);
+            throw new IncorrectPasswordException();
         }
-        //if (!validSunday()) throw new CustomException(ErrorCode.INVALID_DAY_OF_WEEK);
+        //if (!validSunday()) throw new InvalidDayOfWeekException();
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
-            throw new ApplicationException(ErrorCode.DUPLICATE_ATTENDANCE);
+            throw new DuplicateAttendanceException();
         }
 
         Attendance attendance = new Attendance(user);
