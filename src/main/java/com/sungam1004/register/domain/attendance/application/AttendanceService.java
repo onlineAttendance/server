@@ -9,8 +9,6 @@ import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.exception.UserNotFoundException;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.PasswordManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,13 +71,12 @@ public class AttendanceService {
         return response;
     }
 
-    public void changeUserPassword(String password) {
+    public void changeAttendancePassword(String password) {
         passwordManager.changeAttendancePassword(password);
     }
 
     public void toggleAttendance(Long userId, String strDate) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER));
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
 
         Optional<Attendance> optionalAttendance

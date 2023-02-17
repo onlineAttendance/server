@@ -1,4 +1,4 @@
-package com.sungam1004.register.domain.question.entity;
+package com.sungam1004.register.domain.post.entity;
 
 import com.sungam1004.register.domain.post.entity.Post;
 import jakarta.persistence.*;

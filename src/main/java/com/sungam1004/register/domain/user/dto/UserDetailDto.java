@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class UserDetailDto {
@@ -21,9 +20,28 @@ public class UserDetailDto {
 
     private List<AttendanceDate> attendanceDates;
 
+    @Builder
+    public UserDetailDto(Long id, String name, String password, String birth,
+                         Integer attendanceNumber, String team, List<AttendanceDate> attendanceDates) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.birth = birth;
+        this.attendanceNumber = attendanceNumber;
+        this.team = team;
+        this.attendanceDates = attendanceDates;
+    }
+
     public static UserDetailDto of(User user, List<AttendanceDate> AttendanceDates) {
-        return new UserDetailDto(user.getId(), user.getName(), user.getPassword(), user.getBirth(),
-                user.getAttendanceNumber(), user.getTeam().toString(), AttendanceDates);
+        return UserDetailDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .password(user.getPassword())
+                .birth(user.getBirth())
+                .attendanceNumber(user.getAttendanceNumber())
+                .team(user.getTeam().name())
+                .attendanceDates(AttendanceDates)
+                .build();
     }
 
     @Data

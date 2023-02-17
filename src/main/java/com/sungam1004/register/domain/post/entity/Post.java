@@ -1,6 +1,5 @@
 package com.sungam1004.register.domain.post.entity;
 
-import com.sungam1004.register.domain.question.entity.Question;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

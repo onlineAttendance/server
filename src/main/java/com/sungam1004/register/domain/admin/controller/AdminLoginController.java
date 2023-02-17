@@ -36,6 +36,7 @@ public class AdminLoginController {
         }
 
         try {
+            System.out.println("password = " + requestDto.getPassword());
             adminPasswordService.loginAdmin(requestDto.getPassword());
         } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.INCORRECT_PASSWORD) {

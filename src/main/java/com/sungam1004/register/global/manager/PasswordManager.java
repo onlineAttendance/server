@@ -36,6 +36,6 @@ public class PasswordManager {
     }
 
     public Boolean isCorrectAdminPassword(String nPassword) {
-        return Objects.equals(adminPassword, nPassword);
+        return adminPassword.equals(nPassword);
     }
 }

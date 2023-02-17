@@ -36,7 +36,7 @@ public class AdminAttendancePasswordController {
             return "admin/password/changeUserPassword";
         }
         try {
-            attendanceService.changeUserPassword(requestDto.getPassword());
+            attendanceService.changeAttendancePassword(requestDto.getPassword());
         } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());

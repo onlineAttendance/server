@@ -13,7 +13,7 @@ public class AddUserDto {
 
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
+    @Data
     public static class Request {
         @NotBlank(message = "이름은 필수입니다.")
         private String name;

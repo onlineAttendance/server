@@ -1,12 +1,11 @@
 package com.sungam1004.register.domain.admin.service;
 
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
 import com.sungam1004.register.global.manager.PasswordManager;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -17,7 +16,7 @@ public class AdminPasswordService {
 
     public void loginAdmin(String password) {
         if (!passwordManager.isCorrectAdminPassword(password)) {
-            throw new ApplicationException(ErrorCode.INCORRECT_PASSWORD);
+            throw new IncorrectPasswordException();
         }
     }
 

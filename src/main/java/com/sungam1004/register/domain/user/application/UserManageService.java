@@ -48,6 +48,7 @@ public class UserManageService {
 
         List<LocalDateTime> dateTimes = statistics.getNameAndAttendances().get(0).getDateTimes();
         List<String> date = StatisticsDto.date;
+
         List<UserDetailDto.AttendanceDate> attendanceDates = new ArrayList<>();
         for (int i = 0; i < dateTimes.size(); i++) {
             attendanceDates.add(new UserDetailDto.AttendanceDate(date.get(i), dateTimes.get(i)));
