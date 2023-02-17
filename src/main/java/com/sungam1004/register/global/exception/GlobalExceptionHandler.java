@@ -1,6 +1,7 @@
 package com.sungam1004.register.global.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -52,9 +53,18 @@ public class GlobalExceptionHandler {
         return ErrorResponse.toResponseEntity(ErrorCode.ACCESS_DENIED);
     }
 
+    /**
+     * IncorrectResultSizeDataAccessException
+     */
+    @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
+    protected ResponseEntity<?> handleMethodIncorrectResultSizeDataAccessException(IncorrectResultSizeDataAccessException e) {
+        log.error("IncorrectResultSizeDataAccessException", e);
+        return ErrorResponse.toResponseEntity(ErrorCode.INCORRECT_RESULT_SIZE_DATA_ACCESS);
+    }
+
     @ExceptionHandler(ApplicationException.class)
     protected ResponseEntity<?> handleBusinessException(final ApplicationException e) {
-        log.error("CustomException", e);
+        log.error("ApplicationException", e);
         return ErrorResponse.toResponseEntity(e.getError());
     }
 

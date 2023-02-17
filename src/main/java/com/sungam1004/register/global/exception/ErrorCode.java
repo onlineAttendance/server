@@ -16,6 +16,7 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C005", "서버 내부에서 에러가 발생하였습니다."),
     NOT_FOUND(HttpStatus.NOT_FOUND, "C006", "Not Found"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "C007", "Bad Request"),
+    INCORRECT_RESULT_SIZE_DATA_ACCESS(HttpStatus.INTERNAL_SERVER_ERROR, "C008", "조회한 데이터의 개수가 의도했던 개수와 다릅니다.(관리자 문의)"),
 
     // Authentication
     EMPTY_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "A001", "Authorization Header가 빈 값입니다."),
