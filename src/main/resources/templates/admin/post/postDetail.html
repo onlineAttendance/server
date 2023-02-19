@@ -8,8 +8,9 @@
 <div class="form" th:object="${postDetailDto}">
     <input type="hidden" th:field="*{postId}" th:value="*{postId}">
     <h2 th:text="*{title}">Title</h2>
-    <div th:text="*{content}">content</div>
-
+    <div class="text-start" style="width: max-content">
+        <div th:utext="*{#strings.replace(content,'&#10;','&lt;br&gt;')}">content</div>
+    </div>
     <br/>
     <hr/>
     <div th:each="question, questionStat : *{questions}">
@@ -21,6 +22,6 @@
     <br/><br/>
     <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin/post/list'">뒤로가기</button>
 
-</div> <!-- /container -->
+</div>
 </body>
 </html>
