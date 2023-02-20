@@ -12,8 +12,8 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        format_sql: true # 실행되는 query를 보여줌
-    show-sql: true
+    #    format_sql: true # 실행되는 query를 보여줌
+    #show-sql: true
 
   sql: # data-mysql.sql 을 실행하기 위한 설정입니다.
     init:
@@ -28,7 +28,7 @@ spring:
 
 logging.level:
   org.hibernate:
-    orm.jdbc.bind: trace
+    #orm.jdbc.bind: trace
 
 server:
   servlet:
