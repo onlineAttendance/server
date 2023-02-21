@@ -22,6 +22,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -64,8 +65,12 @@ public class AttendanceService {
 
         AttendanceDto.Response response = new AttendanceDto.Response(team.name());
         LocalDateTime startDatetime = LocalDate.now().atStartOfDay();
+
+        List<Long> userIds = users.stream().map(User::getId).collect(Collectors.toList());
+        List<Attendance> attendances = attendanceRepository.findByUsersAndCreatedAtAfter(userIds, startDatetime);
+
         for (User user : users) {
-            boolean isAttendance = attendanceRepository.existsByUserAndCreatedAtAfter(user, startDatetime);
+            boolean isAttendance = attendances.stream().anyMatch(a -> a.getUser().getId().equals(user.getId()));
             response.addPerson(isAttendance, user.getName(), user.getFaceImageUri());
         }
         return response;

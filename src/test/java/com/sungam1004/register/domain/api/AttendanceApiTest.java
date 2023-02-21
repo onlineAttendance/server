@@ -59,6 +59,7 @@ class AttendanceApiTest {
         AttendanceDto.Request attendanceDto = new AttendanceDto.Request("1234");
         String content = objectMapper.writeValueAsString(attendanceDto);
 
+        //System.out.println("=====================================");
         // expected
         mockMvc.perform(post("/api/users/attendances")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -71,7 +72,7 @@ class AttendanceApiTest {
                 .andExpect(jsonPath("$.attendance[0].imageFileName").value("default.png"))
                 .andExpect(jsonPath("$.notAttendance").exists())
                 .andDo(print());
-
+        //System.out.println("=====================================");
         Optional<User> optionalUser = userRepository.findByName("tester");
         assertThat(optionalUser.isPresent()).isEqualTo(true);
         User user = optionalUser.get();
