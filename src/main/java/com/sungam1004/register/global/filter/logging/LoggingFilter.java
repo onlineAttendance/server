@@ -26,7 +26,7 @@ public class LoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         MDC.put("traceId", UUID.randomUUID().toString());
-        if (isAsyncDispatch(request)) {
+        if (request.getRequestURI().startsWith("/admin/") || isAsyncDispatch(request)) {
             filterChain.doFilter(request, response);
         }
         else {

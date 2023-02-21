@@ -45,6 +45,7 @@ class UserLoginApiTest {
         LoginUserDto.Request loginDto = new LoginUserDto.Request("tester", "1234");
         String content = objectMapper.writeValueAsString(loginDto);
 
+        System.out.println("=====================================");
         // expected
         mockMvc.perform(post("/api/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -54,6 +55,7 @@ class UserLoginApiTest {
                 .andExpect(jsonPath("$.grantType").value("Bearer"))
                 .andExpect(jsonPath("$.token").exists())
                 .andDo(print());
+        System.out.println("=====================================");
     }
 
     @Test

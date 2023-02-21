@@ -57,6 +57,7 @@ class UserPatchAccountApiTest {
         ChangeUserPasswordDto.Request loginDto = new ChangeUserPasswordDto.Request("4321");
         String content = objectMapper.writeValueAsString(loginDto);
 
+        System.out.println("=====================================");
         // expected
         mockMvc.perform(patch("/api/users/account/password")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -65,6 +66,7 @@ class UserPatchAccountApiTest {
                 )
                 .andExpect(status().isOk())
                 .andDo(print());
+        System.out.println("=====================================");
 
         Optional<User> optionalUser = userRepository.findByName("tester");
         assertThat(optionalUser.isPresent()).isEqualTo(true);
