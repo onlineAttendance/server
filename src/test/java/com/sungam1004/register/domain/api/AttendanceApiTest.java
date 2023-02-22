@@ -68,6 +68,7 @@ class AttendanceApiTest {
                 )
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.team").value("복통"))
+                .andExpect(jsonPath("$.attendance.length()").value(1))
                 .andExpect(jsonPath("$.attendance[0].name").value("tester"))
                 .andExpect(jsonPath("$.attendance[0].imageFileName").value("default.png"))
                 .andExpect(jsonPath("$.notAttendance").exists())

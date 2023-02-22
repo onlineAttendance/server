@@ -90,4 +90,42 @@ class UserSignupApiTest {
                 .andExpect(jsonPath("$.message").value(ErrorCode.DUPLICATE_USER_NAME.getMessage()))
                 .andDo(print());
     }
+
+    @Test
+    @DisplayName("비밀번호는 숫자 4자리")
+    void errorOnPassword() throws Exception {
+        // given
+        SignupUserDto requestDto = new SignupUserDto("tester", "123", "00.12.12.", "복통", "default.png");
+        userSignupService.addUser(requestDto);
+        String content = objectMapper.writeValueAsString(requestDto);
+
+        // expected
+        mockMvc.perform(post("/api/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(ErrorCode.INVALID_VALUE.getCode()))
+                .andExpect(jsonPath("$.message").value("비밀번호는 숫자 4자리입니다."))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("생년월일 포맷은 yy.MM.dd")
+    void errorOnBirth() throws Exception {
+        // given
+        SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12", "복통", "default.png");
+        userSignupService.addUser(requestDto);
+        String content = objectMapper.writeValueAsString(requestDto);
+
+        // expected
+        mockMvc.perform(post("/api/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(ErrorCode.INVALID_VALUE.getCode()))
+                .andExpect(jsonPath("$.message").value("생년월일은 YY.MM.DD. 형식으로 입력해야 합니다."))
+                .andDo(print());
+    }
 }
