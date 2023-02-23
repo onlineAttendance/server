@@ -9,7 +9,7 @@
         </encoder>
     </appender>
 
-    <springProfile name="!(dev | prod)">
+    <springProfile name="!(prod)">
         <root level="info">
             <appender-ref ref="CONSOLE"/>
         </root>
