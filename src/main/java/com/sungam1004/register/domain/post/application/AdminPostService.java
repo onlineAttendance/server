@@ -125,7 +125,7 @@ public class AdminPostService {
         // Sort.by(정렬방식, 정렬기준)
         // Sort.by(정렬기준): 기본적으로 오름차순으로 정렬
         Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "date"));
-        return postRepository.findAll(pageable).stream()
+        return postRepository.findSliceBy(pageable).stream()
                 .map(PostResponseDto::of)
                 .collect(Collectors.toList());
     }
