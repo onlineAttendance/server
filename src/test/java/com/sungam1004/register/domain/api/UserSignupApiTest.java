@@ -1,10 +1,10 @@
 package com.sungam1004.register.domain.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.global.exception.ErrorCode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc //MockMvc 사용
 @SpringBootTest
 @ActiveProfiles("test")
+@Transactional
 class UserSignupApiTest {
 
     @Autowired
@@ -40,11 +42,6 @@ class UserSignupApiTest {
 
     @Autowired
     private UserSignupService userSignupService;
-
-    @AfterEach
-    void cleanRepository() {
-        userRepository.deleteAll();
-    }
 
     @Test
     @DisplayName("유저 회원가입")
