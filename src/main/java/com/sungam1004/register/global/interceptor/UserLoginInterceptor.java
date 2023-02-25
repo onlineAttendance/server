@@ -19,6 +19,10 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
+
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         // 토큰 유무 확인
