@@ -1,9 +1,12 @@
 spring:
 
   datasource:
-    url: ENC(DVE+kSs1XlDkbIb0AFXhxJnvvZ1h0hlfesFuYPFcHnDgGQf6FULjc/TQD1I8/3Mq/6r4Es570d3gv3XCc1AZrOG/EjmB5Q/Hzr82hjbkaSbLgz6+58h+XjMuIU4CXt/di+HBRDMB0azB+yXgOTa37Q==)
-    username: ENC(7QvAWkMK35f/UXBxDk7OcQ==)
-    password: ENC(CUe+Ul1+QVveDkjG0Ao5Z1jMI66QnX6T)
+    url: ENC(KurHzGc9fsEi8StdltkAB6DYkFY2bc2Y3E9Gz+qGdh803MfRyh9YRuXT4awFnp8U8ocup2yH9PS3yjwRFDmSaH5h+zmZySLYEAkH0MPYFUimoYUBYuq0UW4plWK9sGPZAZzmtZ5Rkx1TrZOK+aq/xK6QCJhQcK5DFhflWLvmzMtufZnllLbYrA==)
+    username: ENC(T/oamH1qoBv7rvgw9QFuAQ==)
+    password: ENC(dJGbYiYQYUjanAK+v9/CAurFFKQ8RnfN)
+    #url: ENC(DVE+kSs1XlDkbIb0AFXhxJnvvZ1h0hlfesFuYPFcHnDgGQf6FULjc/TQD1I8/3Mq/6r4Es570d3gv3XCc1AZrOG/EjmB5Q/Hzr82hjbkaSbLgz6+58h+XjMuIU4CXt/di+HBRDMB0azB+yXgOTa37Q==)
+    #username: ENC(7QvAWkMK35f/UXBxDk7OcQ==)
+    #password: ENC(CUe+Ul1+QVveDkjG0Ao5Z1jMI66QnX6T)
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
