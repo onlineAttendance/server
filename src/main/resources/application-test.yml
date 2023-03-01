@@ -21,8 +21,8 @@ spring:
 
   sql: # data-h2.sql 을 실행하기 위한 설정입니다.
     init:
-      #platform: h2
-      #mode: always
+      platform: h2
+      mode: always
 
   servlet:
     multipart:
@@ -32,7 +32,7 @@ spring:
 logging.level:
   org.hibernate:
     orm.jdbc.bind: trace
-  org.apache.coyote.http11: debug
+  #org.apache.coyote.http11: debug
 
 server:
   servlet:
