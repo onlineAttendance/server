@@ -47,7 +47,7 @@ class UserSignupApiTest {
     @DisplayName("유저 회원가입")
     void signupUser() throws Exception {
         // given
-        SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
+        SignupUserDto requestDto = new SignupUserDto("tester", "1234", "02.04.26.", "복통", "default.png");
 
         String content = objectMapper.writeValueAsString(requestDto);
 
@@ -64,7 +64,7 @@ class UserSignupApiTest {
         User user = tester.get();
         assertThat(user.getName()).isEqualTo("tester");
         assertThat(user.getPassword()).isEqualTo("1234");
-        assertThat(user.getBirth()).isEqualTo("00.12.12.");
+        assertThat(user.getBirth()).isEqualTo("02.04.26.");
         assertThat(user.getTeam().name()).isEqualTo("복통");
         assertThat(user.getFaceImageUri()).isEqualTo("default.png");
     }
