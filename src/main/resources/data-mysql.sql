@@ -13,6 +13,7 @@ insert into users (attendance_number, name, birth, password, face_image_uri, tea
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '노하영','03.04.21.','1234','default.png', '복덕복덕');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '양한서','03.09.29.','1234','default.png', '복덕복덕');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '신원일','03.11.13.','1234','default.png', '복덕복덕');
+insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '김동규','03.05.07.','1234','default.png', '복덕복덕');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '오유미','04.05.20.','1234','default.png', '복덕복덕');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '이하은','97.08.22.','1234','default.png', '복덕복덕');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '탁민경','86.09.02.','1234','default.png', '복권');
@@ -39,6 +40,7 @@ insert into users (attendance_number, name, birth, password, face_image_uri, tea
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '오유환','01.11.01.','1234','default.png', '복통');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '김태윤','04.03.06.','1234','default.png', '복통');
 insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '조민성','01.01.02.','1234','default.png', '복통');
+insert into users (attendance_number, name, birth, password, face_image_uri, team) values (0, '이영찬','02.04.26.','1234','default.png', '복통');
 
 insert into post (title, date, content) values ('엎드려 복 받기 - ② 하나님 나라에서', '2023-01-29','믿음으로 구원받은 성도가 누릴 수 있는 복은 예수 그리스도 안에서 생명을 얻어 하나님의 나라의 백성이 되었다는 것입니다.
 하나님 나라는 마지막 때에 우리에게 나타날 천국이라는 공간적 개념과 지금 우리 삶 가운데 하나님의 통치와 임재로 드러나는 통치적 개념으로 구분되어집니다.
