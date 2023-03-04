@@ -10,18 +10,18 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    defer-datasource-initialization: true
+    #defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
     #    format_sql: true # 실행되는 query를 보여줌
     #show-sql: true
 
-  sql: # data-mysql.sql 을 실행하기 위한 설정입니다.
-    init:
-      platform: mysql
-      mode: always
+  #sql: # data-mysql.sql 을 실행하기 위한 설정입니다.
+    #init:
+      #platform: mysql
+      #mode: always
 
   servlet:
     multipart:
@@ -39,7 +39,7 @@ server:
       tracking-modes: cookie
 
 file:
-  path: /home/ec2-user/app/server/server/file
+  path: /home/ec2-user/file/excel
   #path: /workspace/file
   #path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/file
 
@@ -52,7 +52,7 @@ token:
   access-token-expiration: 7200000 # 2시간
 
 image:
-  path: /home/ec2-user/app/server/server/image
+  path: /home/ec2-user/file/image
   #path: /workspace/image
   #path: /Users/hongseungtaeg/Desktop/toyproject/toyProject8-onlineAttendanceServer/src/main/resources/static/image
   default_filename: default.png

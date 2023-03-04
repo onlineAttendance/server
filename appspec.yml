@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/online-attendnace/ # S3에서 받아온 프로젝트 위치
+    destination: /home/ec2-user/online-attendance/ # S3에서 받아온 프로젝트 위치
     overwrite: yes
 
 permissions:
