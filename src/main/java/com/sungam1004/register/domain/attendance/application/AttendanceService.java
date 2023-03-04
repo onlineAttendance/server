@@ -4,6 +4,7 @@ import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
 import com.sungam1004.register.domain.attendance.entity.Attendance;
 import com.sungam1004.register.domain.attendance.exception.DuplicateAttendanceException;
 import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
+import com.sungam1004.register.domain.attendance.exception.InvalidDayOfWeekException;
 import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
 import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
@@ -39,7 +40,7 @@ public class AttendanceService {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
             throw new IncorrectPasswordException();
         }
-        //if (!validSunday()) throw new InvalidDayOfWeekException();
+        if (!validSunday()) throw new InvalidDayOfWeekException();
 
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
