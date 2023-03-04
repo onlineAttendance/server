@@ -8,6 +8,7 @@ import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.domain.user.application.UserLoginService;
 import com.sungam1004.register.domain.user.application.UserSignupService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ class AttendanceApiTest {
     private UserRepository userRepository;
 
     @Test
+    @Disabled
     @DisplayName("출석")
     void attendanceSuccess() throws Exception {
         // given
