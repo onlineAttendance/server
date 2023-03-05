@@ -68,7 +68,7 @@ public class AttendanceService {
         LocalDateTime startDatetime = LocalDate.now().atStartOfDay();
 
         List<Long> userIds = users.stream().map(User::getId).collect(Collectors.toList());
-        List<Attendance> attendances = attendanceRepository.findByUsersAndCreatedAtAfter(userIds, startDatetime);
+        List<Attendance> attendances = attendanceRepository.findAttendanceByTeamAndDate(userIds, startDatetime);
 
         for (User user : users) {
             boolean isAttendance = attendances.stream().anyMatch(a -> a.getUser().getId().equals(user.getId()));

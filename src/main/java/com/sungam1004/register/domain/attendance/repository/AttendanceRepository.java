@@ -17,7 +17,7 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
     boolean existsByUserAndCreatedAtAfter(User user, LocalDateTime date);
 
-    @Query("select a from Attendance a where a.user.id in :userIds and a.createdAt > :date")
-    List<Attendance> findByUsersAndCreatedAtAfter(@Param("userIds") List<Long> userIds, @Param("date") LocalDateTime date);
+    @Query("select a from Attendance a where a.user.id in :userIds and a.createdAt >= :date")
+    List<Attendance> findAttendanceByTeamAndDate(@Param("userIds") List<Long> userIds, @Param("date") LocalDateTime date);
 
 }
