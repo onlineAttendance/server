@@ -50,7 +50,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("https://onlineattendance-61655.web.app", "http://localhost:3000",
-                        "http://localhost:8080", "http://localhost:8081", "http://localhost:8082")
+                        "http://localhost:8080", "http://localhost:8081", "http://localhost:8082",
+                        "https://sungam.site")
                 .allowedHeaders(HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCEPT, HttpHeaders.AUTHORIZATION)
                 .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(),
                         HttpMethod.PATCH.name(), HttpMethod.OPTIONS.name());
