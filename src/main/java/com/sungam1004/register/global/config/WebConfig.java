@@ -6,6 +6,8 @@ import com.sungam1004.register.global.manager.TokenManager;
 import com.sungam1004.register.global.resolver.UserIdArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -24,14 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new UserLoginInterceptor(tokenManager))
-                .order(1) //낮을 수록 먼저 호출
-                .addPathPatterns("/api/users/**") //인터셉터를 적용할 url 패턴
-                .excludePathPatterns("/api/users/login", "/api/users/signup", "/api/users/posts/*", "/api/users/images/**", "/css/**", "/*.ico", "/error", "/js/**"); //인터셉터에서 제외할 패턴 지정
+                .addPathPatterns("/api/users/**")
+                .excludePathPatterns("/api/users/login", "/api/users/signup", "/api/users/posts/*",
+                        "/api/users/images/**", "/css/**", "/*.ico", "/error", "/js/**");
 
         registry.addInterceptor(new AdminLoginInterceptor())
-                .order(2) //낮을 수록 먼저 호출
-                .addPathPatterns("/admin/**") //인터셉터를 적용할 url 패턴
-                .excludePathPatterns("/css/**", "/*.ico", "/error", "/admin/login", "/js/**"); //인터셉터에서 제외할 패턴 지정
+                .addPathPatterns("/admin/**")
+                .excludePathPatterns("/admin/login", "/css/**", "/*.ico", "/error", "/js/**");
     }
 
     @Override
@@ -45,23 +46,13 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/admin").setViewName("admin/adminHome");
     }
 
-    /*
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://front-server.com");
-            }
-        };
-    }
-    */
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedHeaders("Content-Type", "Accept", "Authorization")
-                .allowedMethods("GET", "POST", "PATCH", "OPTIONS");
+                .allowedOrigins("https://onlineattendance-61655.web.app", "http://localhost:3000",
+                        "http://localhost:8080", "http://localhost:8081", "http://localhost:8082")
+                .allowedHeaders(HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCEPT, HttpHeaders.AUTHORIZATION)
+                .allowedMethods(HttpMethod.GET.name(), HttpMethod.POST.name(),
+                        HttpMethod.PATCH.name(), HttpMethod.OPTIONS.name());
     }
 }

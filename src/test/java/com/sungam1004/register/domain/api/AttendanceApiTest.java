@@ -2,18 +2,19 @@ package com.sungam1004.register.domain.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
+import com.sungam1004.register.domain.user.application.UserLoginService;
+import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.domain.user.dto.LoginUserDto;
 import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.domain.user.application.UserLoginService;
-import com.sungam1004.register.domain.user.application.UserSignupService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -65,7 +66,7 @@ class AttendanceApiTest {
         // expected
         mockMvc.perform(post("/api/users/attendances")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + accessToken)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                         .content(content)
                 )
                 .andExpect(status().isCreated())
@@ -93,7 +94,7 @@ class AttendanceApiTest {
         // expected
         mockMvc.perform(get("/api/users/attendances")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + accessToken)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.team").value("복통"))
