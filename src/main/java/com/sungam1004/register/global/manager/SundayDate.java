@@ -1,11 +1,7 @@
 package com.sungam1004.register.global.manager;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 
-
-@Slf4j
 public class SundayDate {
     public static final List<String> dates =
             List.of("2023-01-01",

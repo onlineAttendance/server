@@ -5,7 +5,6 @@ import com.sungam1004.register.global.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Component
@@ -25,7 +24,7 @@ public class PasswordManager {
     }
 
     public Boolean isCorrectAttendancePassword(String nPassword) {
-        return Objects.equals(attendancePassword, nPassword);
+        return attendancePassword.equals(nPassword);
     }
 
     public void changeAdminPassword(String nPassword) {

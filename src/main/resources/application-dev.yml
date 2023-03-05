@@ -48,7 +48,7 @@ password:
   admin: rhksflwk
 
 token:
-  secret: test
+  secret: ENC(cpUvwDeDNLrw4mhMJ4IS8CemG7KweEGq)
   access-token-expiration: 7200000 # 2시간
 
 image:
