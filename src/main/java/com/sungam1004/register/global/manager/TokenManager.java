@@ -1,6 +1,7 @@
 package com.sungam1004.register.global.manager;
 
 import com.sungam1004.register.domain.user.dto.TokenDto;
+import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.AuthenticationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import io.jsonwebtoken.*;
@@ -22,6 +23,8 @@ public class TokenManager {
     @Value("${token.access-token-expiration}")
     private String accessTokenExpiration;
 
+    private final UserRepository userRepository;
+
     public TokenDto createTokenDto(Long userId) {
         String accessToken = createAccessToken(userId);
         return TokenDto.builder()
@@ -42,23 +45,23 @@ public class TokenManager {
     }
 
     public Long getUserId(String token) {
-        String userId;
         try {
             Claims claims = Jwts.parser().setSigningKey(tokenSecret)
                     .parseClaimsJws(token).getBody();
-            userId = claims.getAudience();
+            String strUserId = claims.getAudience();
+            return Long.valueOf(strUserId);
         } catch (Exception e) {
             e.printStackTrace();
             throw new AuthenticationException(ErrorCode.INVALID_TOKEN);
         }
-        return Long.valueOf(userId);
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(tokenSecret)
-                    .parseClaimsJws(token);
-            return true;
+            String strUserId = Jwts.parser().setSigningKey(tokenSecret)
+                    .parseClaimsJws(token).getBody().getAudience();
+            Long userId = Long.valueOf(strUserId);
+            return userRepository.existsById(userId);
         } catch (ExpiredJwtException e) {
             log.info("토큰 기한 만료", e);
             throw new AuthenticationException(ErrorCode.EXPIRED_TOKEN);
