@@ -52,7 +52,7 @@ class UserPatchAccountApiTest {
     void changePassword() throws Exception {
         // given
         SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(signupUserDto);
+        userSignupService.addUser(signupUserDto.toEntity());
 
         String accessToken = userLoginService.loginUser(new LoginUserDto.Request("tester", "1234")).getToken();
         ChangeUserPasswordDto.Request loginDto = new ChangeUserPasswordDto.Request("4321");

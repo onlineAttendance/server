@@ -74,7 +74,7 @@ class UserSignupApiTest {
     void signupUserDuplicateName() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(requestDto);
+        userSignupService.addUser(requestDto.toEntity());
         String content = objectMapper.writeValueAsString(requestDto);
 
         // expected
@@ -93,7 +93,7 @@ class UserSignupApiTest {
     void errorOnPassword() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "123", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(requestDto);
+        userSignupService.addUser(requestDto.toEntity());
         String content = objectMapper.writeValueAsString(requestDto);
 
         // expected
@@ -112,7 +112,7 @@ class UserSignupApiTest {
     void errorOnBirth() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12", "복통", "default.png");
-        userSignupService.addUser(requestDto);
+        userSignupService.addUser(requestDto.toEntity());
         String content = objectMapper.writeValueAsString(requestDto);
 
         // expected

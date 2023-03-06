@@ -40,7 +40,7 @@ class UserLoginApiTest {
     void login() throws Exception {
         // given
         SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(signupUserDto);
+        userSignupService.addUser(signupUserDto.toEntity());
 
         LoginUserDto.Request loginDto = new LoginUserDto.Request("tester", "1234");
         String content = objectMapper.writeValueAsString(loginDto);
@@ -63,7 +63,7 @@ class UserLoginApiTest {
     void failsLoginByPassword() throws Exception {
         // given
         SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(signupUserDto);
+        userSignupService.addUser(signupUserDto.toEntity());
 
         LoginUserDto.Request loginDto = new LoginUserDto.Request("tester", "1231");
         String content = objectMapper.writeValueAsString(loginDto);
@@ -84,7 +84,7 @@ class UserLoginApiTest {
     void failsLoginByName() throws Exception {
         // given
         SignupUserDto signupUserDto = new SignupUserDto("tester", "1234", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(signupUserDto);
+        userSignupService.addUser(signupUserDto.toEntity());
 
         LoginUserDto.Request loginDto = new LoginUserDto.Request("tester1", "1234");
         String content = objectMapper.writeValueAsString(loginDto);
