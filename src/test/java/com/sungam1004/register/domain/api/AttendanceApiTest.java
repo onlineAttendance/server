@@ -8,6 +8,7 @@ import com.sungam1004.register.domain.user.dto.LoginUserDto;
 import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
+import com.sungam1004.register.global.exception.ErrorCode;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -81,6 +82,24 @@ class AttendanceApiTest {
         assertThat(optionalUser.isPresent()).isEqualTo(true);
         User user = optionalUser.get();
         assertThat(user.getAttendanceNumber()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("출석은 로그인 회원만 가능")
+    void failAttendance() throws Exception {
+        // given
+        AttendanceDto.Request attendanceDto = new AttendanceDto.Request("1234");
+        String content = objectMapper.writeValueAsString(attendanceDto);
+
+        // expected
+        mockMvc.perform(post("/api/users/attendances")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.code").value(ErrorCode.EMPTY_AUTHORIZATION.getCode()))
+                .andExpect(jsonPath("$.message").value(ErrorCode.EMPTY_AUTHORIZATION.getMessage()))
+                .andDo(print());
     }
 
     @Test
