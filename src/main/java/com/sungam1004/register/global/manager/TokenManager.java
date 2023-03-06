@@ -4,12 +4,16 @@ import com.sungam1004.register.domain.user.dto.TokenDto;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.AuthenticationException;
 import com.sungam1004.register.global.exception.ErrorCode;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
@@ -35,33 +39,21 @@ public class TokenManager {
 
     private String createAccessToken(Long userId) {
         return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setSubject("accessToken")
                 .setAudience(String.valueOf(userId))
+                .setIssuer("sungam.site")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(accessTokenExpiration)))
-                .signWith(SignatureAlgorithm.HS512, tokenSecret)
-                .setHeaderParam("typ", "JWT")
+                .signWith(SignatureAlgorithm.HS256, tokenSecret.getBytes(StandardCharsets.UTF_8))
                 .compact();
     }
 
     public Long getUserId(String token) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(tokenSecret)
-                    .parseClaimsJws(token).getBody();
-            String strUserId = claims.getAudience();
-            return Long.valueOf(strUserId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AuthenticationException(ErrorCode.INVALID_TOKEN);
-        }
-    }
-
-    public boolean validateToken(String token) {
-        try {
-            String strUserId = Jwts.parser().setSigningKey(tokenSecret)
+            String strUserId = Jwts.parser().setSigningKey(tokenSecret.getBytes(StandardCharsets.UTF_8))
                     .parseClaimsJws(token).getBody().getAudience();
-            Long userId = Long.valueOf(strUserId);
-            return userRepository.existsById(userId);
+            return Long.valueOf(strUserId);
         } catch (ExpiredJwtException e) {
             log.info("토큰 기한 만료", e);
             throw new AuthenticationException(ErrorCode.EXPIRED_TOKEN);
@@ -70,8 +62,12 @@ public class TokenManager {
             throw new AuthenticationException(ErrorCode.INVALID_TOKEN);
         } catch (Exception e) {
             log.info("jwt token 검증 중 에러 발생", e);
+            throw new AuthenticationException(ErrorCode.INVALID_TOKEN);
         }
-        return false;
+    }
+
+    public boolean validateToken(String token) {
+        return userRepository.existsById(getUserId(token));
     }
 
 }
