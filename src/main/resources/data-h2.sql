@@ -1,47 +1,48 @@
 -- Test 실행 시 필요한 초기 데이터입니다. h2 문법에 맞춰져 있습니다.
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍고은','94.10.27.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이하언','97.06.22.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이대현','97.09.17.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '지화정','99.03.23.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '최주안','02.01.10.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '성기현','02.06.27.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이찬주','03.09.30.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '안준범','95.10.12.','1234','default.png', '복덕방');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '박진선','92.10.23.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소예은','96.07.27.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '신명환','97.12.26.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김보경','01.09.03.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '노하영','03.04.21.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '양한서','03.09.29.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '신원일','03.11.13.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김동규','03.05.07.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '오유미','04.05.20.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이하은','97.08.22.','1234','default.png', '복덕복덕');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '탁민경','86.09.02.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '한울','92.03.09.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍선경','96.04.09.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '박예림','94.10.24.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '조대승','95.06.22.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소예진','97.09.22.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '최찬영','03.10.03.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김진환','00.12.25.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소준섭','94.02.27.','1234','default.png', '복권');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '손혜영','86.07.24.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '정유정','94.01.02.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이지혜','95.11.11.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김영래','98.02.19.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '양지혜','99.04.24.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍정희','00.10.06.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김승빈','02.10.26.','1234','default.png', '또복');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '윤지연','97.09.16.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김지연','97.04.10.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소명섭','99.06.23.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '정슬기','99.11.26.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍승택','00.03.27.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '오유환','01.11.01.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김태윤','04.03.06.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '조민성','01.01.02.','1234','default.png', '복통');
-insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이영찬','03.05.07.','1234','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍고은','94.10.27.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이하언','97.06.22.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이대현','97.09.17.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '지화정','99.03.23.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '최주안','02.01.10.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '성기현','02.06.27.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이찬주','03.09.30.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '안준범','95.10.12.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕방');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '박진선','92.10.23.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소예은','96.07.27.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '신명환','97.12.26.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김보경','01.09.03.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '노하영','03.04.21.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '양한서','03.09.29.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '신원일','03.11.13.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김동규','03.05.07.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '오유미','04.05.20.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이하은','97.08.22.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복덕복덕');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '탁민경','86.09.02.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '한울', '92.03.09.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍선경','96.04.09.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '박예림','94.10.24.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '조대승','95.06.22.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소예진','97.09.22.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '최찬영','03.10.03.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김진환','00.12.25.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소준섭','94.02.27.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복권');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '손혜영','86.07.24.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '정유정','94.01.02.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이지혜','95.11.11.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김영래','98.02.19.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '양지혜','99.04.24.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍정희','00.10.06.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김승빈','02.10.26.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '또복');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '윤지연','97.09.16.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김지연','97.04.10.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '소명섭','99.06.23.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '정슬기','99.11.26.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '홍승택','00.03.27.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '오유환','01.11.01.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '김태윤','04.03.06.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '조민성','01.01.02.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '이영찬','03.05.07.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
+insert into USERS (ATTENDANCE_NUMBER, NAME, BIRTH, PASSWORD, FACE_IMAGE_URI, TEAM) values (0, '한대한','03.04.07.','$40801$QGveTEiWKRNSiqXQ15zRbD7954OEmgqh2B0tOaS2vlL9dEeaX3VHfU0XVlPgt1ufZIY1uJiipogEGzTi/LDSIQ==$5PkxdDyxob7rsgJ2IwzOT2xrYbTUCX6kBiSK30DmGdA=','default.png', '복통');
 
 insert into POST (TITLE, DATE, CONTENT) values ('엎드려 복 받기 - ② 하나님 나라에서', '2023-01-29','믿음으로 구원받은 성도가 누릴 수 있는 복은 예수 그리스도 안에서 생명을 얻어 하나님의 나라의 백성이 되었다는 것입니다.
 하나님 나라는 마지막 때에 우리에게 나타날 천국이라는 공간적 개념과 지금 우리 삶 가운데 하나님의 통치와 임재로 드러나는 통치적 개념으로 구분되어집니다.
@@ -171,3 +172,11 @@ insert into POST (TITLE, DATE, CONTENT) values ('엎드려 복 받기 - ⑥ Die�
 예수 그리스도의 고난과 죽음, 부활과 승리를 묵상하는 사순절 기간에 예수 그리스도와 함께 죽고 함께 살아 새로운 생명과 삶으로 살게 되었음을 믿음으로 고백하고 삶으로 증거하는 성암교회 청년부 되길 소망합니다.');
 insert into QUESTION (ORDERS, POST_ID, CONTENT) values (1, 9, '그리스도인답게, 의롭게 살기 위해 거절하고 포기했던 경험을 나누어 봅시다.');
 insert into QUESTION (ORDERS, POST_ID, CONTENT) values (2, 9, '사순절 기간 중에 예수님을 더욱 묵상할 수 있는 방법을 나눠보고 일주일간 실천할 신앙적 목표를 설정해봅시다.');
+
+insert into POST (TITLE, DATE, CONTENT) values ('엎드려 복 받기 - ⑦ 사랑받아 긍휼하기', '2023-03-05', '긍휼하다는 것은 상대방의 비참한 상황을 안타까워하며 돕는다는 것을 의미합니다. 이는 안타까운 상황에 처해있는 사람을 향한 동정과 연민으로부터 출발하는 마음이 아니라 사랑에 근거한 자비로운 마음이라 할 수 있습니다.
+모든 성도는 죄로 인하여 비참하였던 상황에서 예수 그리스도의 사랑으로 구원받아 더이상 비참하지 않게 된, 구원받은 자들입니다. 또한 그러한 사랑을 받은 자로서 사랑하는 입장이 되어 세상과 이웃을 향한 긍휼한 마음을 품는 자들로 부르심을 받은 자들입니다.
+고린도전서 13장이 증거하는 사랑을 우리 삶에 녹여내기엔 참 어렵습니다. 하지만 예수 그리스도와 함께 십자가에 죽고 예수 그리스도 안에 살게 된 자들은 이제 예수 그리스도의 그 사랑을 닮아서 그렇게 살아가는 삶을 선택하였습니다. 그렇게 사는 삶을 통해 또한 하나님을 드러내는, 영광돌리는 삶을 살게 되며 이를 기뻐합니다. 그리고 오늘 본문의 말씀처럼 하나님은 그런 성도를 긍휼히 여기시며 사랑하십니다.
+성암교회 청년부 모든 지체들 가운데 예수 그리스도로부터 받은 사랑이 더욱 분명해지며, 예수 그리스도를 닮은 사랑이 드러나길 소망합니다.');
+insert into QUESTION (ORDERS, POST_ID, CONTENT) values (1, 10, '나는 사랑하는 대상을 어떻게 대하나요?');
+insert into QUESTION (ORDERS, POST_ID, CONTENT) values (2, 10, '도저히 사랑할 수 없는 대상을 어떻게 대하나요?');
+insert into QUESTION (ORDERS, POST_ID, CONTENT) values (2, 10, '오늘 말씀을 통해 사랑에 대하여 결단한 부분이 있다면 나누어 봅시다.');
