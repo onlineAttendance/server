@@ -6,6 +6,7 @@ import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.manager.PasswordEncoder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ class UserSignupApiTest {
     @Autowired
     private UserSignupService userSignupService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     @DisplayName("유저 회원가입")
     void signupUser() throws Exception {
@@ -61,7 +65,7 @@ class UserSignupApiTest {
         assertThat(tester.isPresent()).isEqualTo(true);
         User user = tester.get();
         assertThat(user.getName()).isEqualTo("tester");
-        assertThat(user.getPassword()).isEqualTo("1234");
+        assertThat(passwordEncoder.matches("1234", user.getPassword())).isTrue();
         assertThat(user.getBirth()).isEqualTo("02.04.26.");
         assertThat(user.getTeam().name()).isEqualTo("복통");
         assertThat(user.getFaceImageUri()).isEqualTo("default.png");
@@ -131,7 +135,7 @@ class UserSignupApiTest {
     }
 
     @Test
-    @DisplayName("생년월일 포맷은 yy.MM.dd")
+    @DisplayName("생년월일 포맷은 yy.MM.dd.")
     void errorOnBirth() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12", "복통", "default.png");

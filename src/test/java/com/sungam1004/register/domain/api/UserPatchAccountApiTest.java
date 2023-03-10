@@ -1,13 +1,14 @@
 package com.sungam1004.register.domain.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sungam1004.register.domain.user.application.UserLoginService;
+import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.domain.user.dto.ChangeUserPasswordDto;
 import com.sungam1004.register.domain.user.dto.LoginUserDto;
 import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
-import com.sungam1004.register.domain.user.application.UserLoginService;
-import com.sungam1004.register.domain.user.application.UserSignupService;
+import com.sungam1004.register.global.manager.PasswordEncoder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ class UserPatchAccountApiTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     @DisplayName("비밀번호 변경 성공")
     void changePassword() throws Exception {
@@ -72,7 +76,7 @@ class UserPatchAccountApiTest {
         Optional<User> optionalUser = userRepository.findByName("tester");
         assertThat(optionalUser.isPresent()).isEqualTo(true);
         User user = optionalUser.get();
-        assertThat(user.getPassword()).isEqualTo("4321");
+        assertThat(passwordEncoder.matches("4321", user.getPassword())).isTrue();
     }
 
 
