@@ -1,8 +1,8 @@
 package com.sungam1004.register.domain.user.api;
 
-import com.sungam1004.register.domain.user.dto.ChangeUserPasswordDto;
 import com.sungam1004.register.domain.image.application.ImageService;
 import com.sungam1004.register.domain.user.application.UserPatchAccountService;
+import com.sungam1004.register.domain.user.dto.ChangeUserPasswordDto;
 import com.sungam1004.register.global.resolver.UserId;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class UserPatchAccountApi {
     }
 
     @PatchMapping("images")
-    public void loginUser(@UserId Long userId, MultipartFile faceImageFile) {
+    public void changeFaceImageUri(@UserId Long userId, MultipartFile faceImageFile) {
         String faceImageUri = imageService.registryImage(faceImageFile);
         userPatchAccountService.changeFaceImage(userId, faceImageUri);
     }

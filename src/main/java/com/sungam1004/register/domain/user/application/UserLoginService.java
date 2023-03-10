@@ -6,6 +6,7 @@ import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.exception.FailUserLoginException;
 import com.sungam1004.register.domain.user.exception.UserNotFoundException;
 import com.sungam1004.register.domain.user.repository.UserRepository;
+import com.sungam1004.register.global.manager.PasswordEncoder;
 import com.sungam1004.register.global.manager.TokenManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserLoginService {
     private final UserRepository userRepository;
     private final TokenManager tokenManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public LoginUserDto.Response loginUser(LoginUserDto.Request requestDto) {
         User user = userRepository.findByName(requestDto.getName()).orElseThrow(UserNotFoundException::new);
 
-        String userPassword = user.getPassword();
-        if (requestDto.getPassword().equals(userPassword)) {
+        if (passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             TokenDto tokenDto = tokenManager.createTokenDto(user.getId());
             return LoginUserDto.Response.of(tokenDto);
         }

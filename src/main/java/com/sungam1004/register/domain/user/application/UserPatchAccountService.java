@@ -4,6 +4,7 @@ import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.exception.UserNotFoundException;
 import com.sungam1004.register.domain.user.repository.UserRepository;
+import com.sungam1004.register.global.manager.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserPatchAccountService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void changePassword(Long userId, String password) {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        user.updateUserPassword(password);
+        user.updateUserPassword(passwordEncoder.encrypt(password));
     }
 
 
