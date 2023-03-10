@@ -6,7 +6,6 @@ import com.sungam1004.register.domain.user.dto.SignupUserDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.ErrorCode;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,6 @@ class UserSignupApiTest {
     void signupUser() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "1234", "02.04.26.", "복통", "default.png");
-
         String content = objectMapper.writeValueAsString(requestDto);
 
         // expected
@@ -93,9 +91,34 @@ class UserSignupApiTest {
     void errorOnPassword() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "123", "00.12.12.", "복통", "default.png");
-        userSignupService.addUser(requestDto.toEntity());
         String content = objectMapper.writeValueAsString(requestDto);
 
+        // expected
+        mockMvc.perform(post("/api/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(ErrorCode.INVALID_VALUE.getCode()))
+                .andExpect(jsonPath("$.message").value("비밀번호는 숫자 4자리입니다."))
+                .andDo(print());
+
+
+        requestDto = new SignupUserDto("tester", "12345", "00.12.12.", "복통", "default.png");
+        content = objectMapper.writeValueAsString(requestDto);
+        // expected
+        mockMvc.perform(post("/api/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(ErrorCode.INVALID_VALUE.getCode()))
+                .andExpect(jsonPath("$.message").value("비밀번호는 숫자 4자리입니다."))
+                .andDo(print());
+
+
+        requestDto = new SignupUserDto("tester", "abcd", "00.12.12.", "복통", "default.png");
+        content = objectMapper.writeValueAsString(requestDto);
         // expected
         mockMvc.perform(post("/api/users/signup")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -112,7 +135,6 @@ class UserSignupApiTest {
     void errorOnBirth() throws Exception {
         // given
         SignupUserDto requestDto = new SignupUserDto("tester", "1234", "00.12.12", "복통", "default.png");
-        userSignupService.addUser(requestDto.toEntity());
         String content = objectMapper.writeValueAsString(requestDto);
 
         // expected
