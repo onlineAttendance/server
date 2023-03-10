@@ -13,7 +13,6 @@ public class UserDetailDto {
 
     private Long id;
     private String name;
-    private String password;
     private String birth;
     private Integer attendanceNumber;
     private String team;
@@ -21,11 +20,10 @@ public class UserDetailDto {
     private List<AttendanceDate> attendanceDates;
 
     @Builder
-    public UserDetailDto(Long id, String name, String password, String birth,
+    public UserDetailDto(Long id, String name, String birth,
                          Integer attendanceNumber, String team, List<AttendanceDate> attendanceDates) {
         this.id = id;
         this.name = name;
-        this.password = password;
         this.birth = birth;
         this.attendanceNumber = attendanceNumber;
         this.team = team;
@@ -36,7 +34,6 @@ public class UserDetailDto {
         return UserDetailDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .password(user.getPassword())
                 .birth(user.getBirth())
                 .attendanceNumber(user.getAttendanceNumber())
                 .team(user.getTeam().name())
@@ -54,7 +51,7 @@ public class UserDetailDto {
             this.date = date;
             if (time != null) {
                 isAttendance = true;
-                this.time = time.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
+                this.time = time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
             }
             else isAttendance = false;
         }

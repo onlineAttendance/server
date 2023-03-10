@@ -12,7 +12,6 @@
         <span>이름 : [[*{name}]]</span><br/>
         <span>출석수 : [[*{attendanceNumber}]]</span><br/>
         <span>생일 : [[*{birth}]]</span><br/>
-        <span>비밀번호 : [[*{password}]]</span><br/>
         <span>팀 : [[*{team}]]</span><br/>
     </div>
     <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin/manager'">뒤로가기</button>
@@ -32,7 +31,7 @@
             <td th:text="${attendanceDate.date}">date</td>
 
             <td th:if="${attendanceDate.isAttendance}"
-                th:text="${#strings.equals(attendanceDate.time, '12:00:00') ? '관리자의 의한 출석' : attendanceDate.time}">time
+                th:text="${#strings.equals(attendanceDate.time, '00:00:00') ? '관리자의 의한 출석' : attendanceDate.time}">time
             </td>
             <td th:unless="${attendanceDate.isAttendance}" th:text="결석">time</td>
 
