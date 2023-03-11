@@ -13,6 +13,8 @@
         <span>출석수 : [[*{attendanceNumber}]]</span><br/>
         <span>생일 : [[*{birth}]]</span><br/>
         <span>팀 : [[*{team}]]</span><br/>
+        <button onclick="resetPassword()">비밀번호 초기화</button>
+        <br/>
     </div>
     <button class="w-50 btn btn-warning btn-sm" onclick="location.href='/admin/manager'">뒤로가기</button>
 
@@ -50,8 +52,17 @@
         </tr>
         </tbody>
     </table>
-
-
+    <script th:inline="javascript">
+        function resetPassword() {
+            fetch(window.location.protocol + "//" + window.location.host + "/admin/manager/password/" + [[*{id}]])
+                .then(response => {
+                        if (response.status) alert("비밀번호 초기화 성공!");
+                        else alert("비밀번호 초기화 실패!")
+                    }
+                );
+        }
+    </script>
 </div> <!-- /container -->
 </body>
+
 </html>

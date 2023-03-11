@@ -1,17 +1,14 @@
 package com.sungam1004.register.domain.user.controller;
 
 import com.sungam1004.register.domain.attendance.application.AttendanceService;
+import com.sungam1004.register.domain.user.application.UserManageService;
 import com.sungam1004.register.domain.user.dto.UserDetailDto;
 import com.sungam1004.register.domain.user.dto.UserManagerDto;
-import com.sungam1004.register.domain.user.application.UserManageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,5 +38,11 @@ public class AdminUserManageController {
     public String changeAttendance(@RequestParam Long userId, @RequestParam String date) {
         attendanceService.toggleAttendance(userId, date);
         return "redirect:/admin/manager/detail/" + userId;
+    }
+
+    @GetMapping("password/{userId}")
+    @ResponseBody
+    public void resetPassword(@PathVariable Long userId) {
+        userManageService.resetPassword(userId);
     }
 }

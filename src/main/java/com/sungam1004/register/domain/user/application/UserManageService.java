@@ -8,6 +8,7 @@ import com.sungam1004.register.domain.user.dto.UserManagerDto;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.repository.UserRepository;
 import com.sungam1004.register.global.exception.NotFoundException;
+import com.sungam1004.register.global.manager.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.List;
 public class UserManageService {
     private final UserRepository userRepository;
     private final AttendanceRepository attendanceRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public List<UserManagerDto> findUserAll() {
@@ -58,4 +60,8 @@ public class UserManageService {
     }
 
 
+    public void resetPassword(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
+        user.updateUserPassword(passwordEncoder.encrypt("1234"));
+    }
 }
