@@ -26,8 +26,8 @@ public class AdminEditPostController {
     }
 
     @PostMapping("edit/{postId}")
-    public String editPost(@PathVariable Long postId,
-                           @Valid @ModelAttribute("editPostDto") EditPostDto requestDto, BindingResult bindingResult) {
+    public String editPost(@PathVariable Long postId,  @Valid @ModelAttribute("editPostDto") EditPostDto requestDto,
+                           BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("post 수정 실패");
             return "admin/post/editPostForm";

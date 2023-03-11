@@ -62,7 +62,7 @@ public class AdminPostService {
     public void savePost(SavePostDto.Request requestDto) {
         Post post = requestDto.toEntity();
         List<SavePostDto.Request.Question> questions = requestDto.getQuestions();
-        int orderNum = 0;
+        int orderNum = 1;
         for (SavePostDto.Request.Question questionDto : questions) {
             if (questionDto.getContent().trim().length() != 0) {
                 Question question = Question.builder()
@@ -104,7 +104,7 @@ public class AdminPostService {
         Post post = requestDto.toEntity();
 
         List<EditPostDto.Question> questions = requestDto.getQuestions();
-        int orderNum = 0;
+        int orderNum = 1;
         for (EditPostDto.Question questionDto : questions) {
             if (questionDto.getContent().trim().length() != 0) {
                 Question question = Question.builder()
@@ -119,6 +119,7 @@ public class AdminPostService {
         postRepository.save(post);
     }
 
+    @Transactional(readOnly = true)
     public List<PostResponseDto> findPostUsingPage(int page) {
         // 한 페이지당 넘어올 데이터 개수 = 5
         // 페이지는 0부터 계산이 됨

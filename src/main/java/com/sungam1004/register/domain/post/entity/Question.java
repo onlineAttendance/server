@@ -1,6 +1,5 @@
 package com.sungam1004.register.domain.post.entity;
 
-import com.sungam1004.register.domain.post.entity.Post;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,12 +14,12 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="orders")
+    @Column(name = "orders")
     private Integer order;
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="post_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     public void setPost(Post post) {
