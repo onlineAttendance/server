@@ -96,6 +96,8 @@ public class AdminPostService {
             ret.getQuestions().add(new EditPostDto.Question(1, ""));
         if (questions.size() == 1)
             ret.getQuestions().add(new EditPostDto.Question(2, ""));
+        if (questions.size() == 2)
+            ret.getQuestions().add(new EditPostDto.Question(3, ""));
         return ret;
     }
 
