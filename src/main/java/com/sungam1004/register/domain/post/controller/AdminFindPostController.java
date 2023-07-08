@@ -2,7 +2,7 @@ package com.sungam1004.register.domain.post.controller;
 
 import com.sungam1004.register.domain.post.application.AdminPostService;
 import com.sungam1004.register.domain.post.dto.PostDetailDto;
-import com.sungam1004.register.domain.post.dto.PostManagerDto;
+import com.sungam1004.register.domain.post.dto.PostSummaryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class AdminFindPostController {
 
     @GetMapping("list")
     public String adminPostHome(Model model) {
-        List<PostManagerDto> ret = adminPostService.findPostList();
+        List<PostSummaryDto> ret = adminPostService.findPostSummaryDtoList();
         model.addAttribute("postManagerDto", ret);
         return "admin/post/postList";
     }

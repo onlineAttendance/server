@@ -2,9 +2,9 @@ package com.sungam1004.register.domain.post.application;
 
 import com.sungam1004.register.domain.post.dto.*;
 import com.sungam1004.register.domain.post.entity.Post;
+import com.sungam1004.register.domain.post.entity.Question;
 import com.sungam1004.register.domain.post.exception.PostNotFoundException;
 import com.sungam1004.register.domain.post.repository.PostRepository;
-import com.sungam1004.register.domain.post.entity.Question;
 import com.sungam1004.register.domain.post.repository.QuestionRepository;
 import com.sungam1004.register.global.manager.SundayDate;
 import lombok.RequiredArgsConstructor;
@@ -30,33 +30,26 @@ public class AdminPostService {
     private final QuestionRepository questionRepository;
 
     @Transactional(readOnly = true)
-    public List<PostManagerDto> findPostList() {
-        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
-        List<PostManagerDto> ret = new ArrayList<>();
-        List<String> dates = SundayDate.dates;
+    public List<PostSummaryDto> findPostSummaryDtoList() {
+        final String sortProperty = "data";
+        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, sortProperty));
+        List<String> sundayDates = SundayDate.dates;
 
-        int listPoint = 0;
-        for (String date : dates) {
-            if (posts.size() > listPoint) {
-                Post post = posts.get(listPoint);
-                if (post.getDate().equals(LocalDate.parse(date, DateTimeFormatter.ISO_DATE))) {
-                    ret.add(PostManagerDto.builder()
-                            .id(post.getId())
-                            .title(post.getTitle())
-                            .date(date)
-                            .isExist(true)
-                            .build());
-                    listPoint++;
+        List<PostSummaryDto> postSummaryDtoList = new ArrayList<>();
+        int postsIndex = 0;
+        for (String sundayDate : sundayDates) {
+            if (postsIndex < posts.size()) {
+                Post post = posts.get(postsIndex);
+                if (post.getDate().equals(LocalDate.parse(sundayDate, DateTimeFormatter.ISO_DATE))) {
+                    postSummaryDtoList.add(PostSummaryDto.createExistPost(post.getId(), post.getTitle(), sundayDate));
+                    postsIndex++;
                     continue;
                 }
             }
-            ret.add(PostManagerDto.builder()
-                    .date(date)
-                    .isExist(false)
-                    .build());
+            postSummaryDtoList.add(PostSummaryDto.createNotExistPost(sundayDate));
         }
 
-        return ret;
+        return postSummaryDtoList;
     }
 
     public void savePost(SavePostDto.Request requestDto) {

@@ -40,7 +40,7 @@ public class AttendanceService {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
             throw new IncorrectPasswordException();
         }
-        if (!validSunday()) throw new InvalidDayOfWeekException();
+        validSunday();
 
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
@@ -55,9 +55,12 @@ public class AttendanceService {
         return user.getTeam();
     }
 
-    private boolean validSunday() {
+    private void validSunday() {
         DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
-        return dayOfWeek.getValue() == 7; // 월=1, 일=7
+        // 월=1, 일=7
+        if (dayOfWeek.getValue() == 7) {
+            throw new InvalidDayOfWeekException();
+        }
     }
 
     @Transactional(readOnly = true)
@@ -95,5 +98,25 @@ public class AttendanceService {
 
         attendanceRepository.save(new Attendance(user, date.atStartOfDay()));
         user.increaseAttendanceNumber();
+    }
+
+    public void saveAttendanceForController(String name, String password) {
+        User user = userRepository.findByName(name)
+                .orElseThrow(UserNotFoundException::new);
+
+        if (!passwordManager.isCorrectAttendancePassword(password)) {
+            throw new IncorrectPasswordException();
+        }
+
+        //validSunday();
+
+        if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
+            throw new DuplicateAttendanceException();
+        }
+
+        Attendance attendance = new Attendance(user);
+        attendanceRepository.save(attendance);
+        user.increaseAttendanceNumber();
+        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
     }
 }

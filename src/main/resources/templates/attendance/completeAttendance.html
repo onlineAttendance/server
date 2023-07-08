@@ -3,86 +3,10 @@
 <head>
     <meta th:replace="~{fragment/head :: headFrag('출석성공')}"/>
     <meta th:replace="~{fragment/head :: styleFrag}"/>
-    <style>
-        .dashboard {
-            display: flex;
-        }
-
-        svg {
-            width: 114px;
-            height: 114px;
-            margin: 1em;
-        }
-
-        .bg {
-            fill: none;
-            stroke-width: 10px;
-            stroke: #1A2C34;
-        }
-
-        [class^="meter"] {
-            fill: none;
-            stroke-width: 10px;
-            stroke-linecap: round;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-        }
-
-        .meter {
-            stroke-dasharray: 360;
-            stroke-dashoffset: 360;
-            stroke: lime;
-            animation: progress 1s ease-out;
-        }
-
-        @keyframes progress {
-            from {
-                stroke-dashoffset: 360;
-            }
-            to {
-                stroke-dashoffset: 360;
-            }
-        }
-    </style>
-
-    <script>
-        window.onload = function () {
-            var ratio = [[${teamAttendance.ratio}]];
-            var val = 360 - 36 * ratio / 10;
-            var target = document.getElementsByClassName("meter")[0];
-            target.style.strokeDashoffset = String(val);
-
-            let rule = '@keyframes progress {from {stroke-dashoffset: 360; to {stroke-dashoffset: ' + val + ';}}';
-            let dynamicStyles = document.createElement('style');
-            dynamicStyles.type = 'text/css';
-            document.head.appendChild(dynamicStyles);
-            dynamicStyles.sheet.insertRule(rule, dynamicStyles.length);
-        }
-    </script>
 </head>
 <body class="text-center">
 <div class="form">
-    <h2>출석이 완료되었습니다.</h2>
-    <br/>
-    <div th:object="${teamAttendance}">
-        <h4 th:text="*{team}">팀이름</h4>
-
-        <div class="dashboard">
-            <svg>
-                <circle class="bg" cx="57" cy="57" r="52"/>
-                <circle class="meter" cx="57" cy="57" r="52"/>
-            </svg>
-        </div>
-        <h4>현재 출석자</h4>
-        <div th:each="name : *{attendanceNames}">
-            <span th:text="${name}">name</span>
-        </div>
-        <br/>
-        <h4>현재 미출석자</h4>
-        <div th:each="name : *{notAttendanceNames}">
-            <span th:text="${name}">name</span>
-        </div>
-    </div>
+    <h3>출석이 완료되었습니다.</h3>
 </div>
 </body>
 </html>

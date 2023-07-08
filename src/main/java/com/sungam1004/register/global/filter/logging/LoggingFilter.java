@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@Component
+//@Component
 public class LoggingFilter extends OncePerRequestFilter {
     protected static final Logger log = LoggerFactory.getLogger(LoggingFilter.class);
 
@@ -29,8 +29,7 @@ public class LoggingFilter extends OncePerRequestFilter {
         if (request.getMethod().equals("OPTIONS") || request.getRequestURI().startsWith("/admin/")
                 || request.getRequestURI().startsWith("/h2-console/") || isAsyncDispatch(request)) {
             filterChain.doFilter(request, response);
-        }
-        else {
+        } else {
             doFilterWrapped(new RequestWrapper(request), new ResponseWrapper(response), filterChain);
         }
         MDC.clear();
@@ -69,8 +68,7 @@ public class LoggingFilter extends OncePerRequestFilter {
                 String contentString = new String(content);
                 log.info("{} Payload: {}", prefix, contentString);
             }
-        }
-        else {
+        } else {
             log.info("{} Payload: Binary Content", prefix);
         }
     }
