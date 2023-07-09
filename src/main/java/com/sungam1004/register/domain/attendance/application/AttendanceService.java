@@ -108,7 +108,7 @@ public class AttendanceService {
             throw new IncorrectPasswordException();
         }
 
-        //validSunday();
+        validSunday();
 
         if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
             throw new DuplicateAttendanceException();

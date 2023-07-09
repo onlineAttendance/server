@@ -31,7 +31,7 @@ public class AdminPostService {
 
     @Transactional(readOnly = true)
     public List<PostSummaryDto> findPostSummaryDtoList() {
-        final String sortProperty = "data";
+        final String sortProperty = "date";
         List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, sortProperty));
         List<String> sundayDates = SundayDate.dates;
 
