@@ -21,7 +21,8 @@ spring:
 
   sql.init: # data-h2.sql 을 실행하기 위한 설정입니다.
     platform: h2
-    mode: never #neveralways
+    #mode: always
+    mode: never
 
   servlet:
     multipart:

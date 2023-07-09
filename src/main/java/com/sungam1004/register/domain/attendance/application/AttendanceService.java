@@ -58,7 +58,7 @@ public class AttendanceService {
     private void validSunday() {
         DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
         // 월=1, 일=7
-        if (dayOfWeek.getValue() == 7) {
+        if (dayOfWeek.getValue() != DayOfWeek.SUNDAY.getValue()) {
             throw new InvalidDayOfWeekException();
         }
     }
