@@ -1,6 +1,5 @@
 package com.sungam1004.register.domain.attendance.application;
 
-import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
 import com.sungam1004.register.domain.attendance.entity.Attendance;
 import com.sungam1004.register.domain.attendance.exception.DuplicateAttendanceException;
 import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
@@ -21,10 +20,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 @Service
 @Slf4j
@@ -55,6 +50,49 @@ public class AttendanceService {
         return user.getTeam();
     }
 
+    public void changeAttendancePassword(String password) {
+        passwordManager.changeAttendancePassword(password);
+    }
+
+    public void toggleAttendance(Long userId, String strDate) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        attendanceRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay)
+                .ifPresentOrElse(
+                        attendance -> deleteAttendance(user, attendance),
+                        () -> saveAttendance(user, startOfDay)
+                );
+    }
+
+    private void deleteAttendance(User user, Attendance attendance) {
+        attendanceRepository.delete(attendance);
+        user.decreaseAttendanceNumber();
+    }
+
+    private void saveAttendance(User user, LocalDateTime attendanceDateTime) {
+        Attendance attendance = new Attendance(user, attendanceDateTime);
+        attendanceRepository.save(attendance);
+        user.increaseAttendanceNumber();
+    }
+
+    public void saveAttendanceForController(String name, String password) {
+        User user = userRepository.findByName(name)
+                .orElseThrow(UserNotFoundException::new);
+
+        validPassword(password);
+        validSunday();
+        validDuplicateAttendance(user);
+
+        Attendance attendance = new Attendance(user);
+        attendanceRepository.save(attendance);
+        user.increaseAttendanceNumber();
+        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
+    }
+
     private void validSunday() {
         DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
         // 월=1, 일=7
@@ -63,60 +101,16 @@ public class AttendanceService {
         }
     }
 
-    @Transactional(readOnly = true)
-    public AttendanceDto.Response findTodayAttendanceByTeam(Team team) {
-        List<User> users = userRepository.findByTeam(team);
-
-        AttendanceDto.Response response = new AttendanceDto.Response(team.name());
-        LocalDateTime startDatetime = LocalDate.now().atStartOfDay();
-
-        List<Long> userIds = users.stream().map(User::getId).collect(Collectors.toList());
-        List<Attendance> attendances = attendanceRepository.findAttendanceByTeamAndDate(userIds, startDatetime);
-
-        for (User user : users) {
-            boolean isAttendance = attendances.stream().anyMatch(a -> a.getUser().getId().equals(user.getId()));
-            response.addPerson(isAttendance, user.getName(), user.getFaceImageUri());
-        }
-        return response;
-    }
-
-    public void changeAttendancePassword(String password) {
-        passwordManager.changeAttendancePassword(password);
-    }
-
-    public void toggleAttendance(Long userId, String strDate) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
-
-        Optional<Attendance> optionalAttendance
-                = attendanceRepository.findByUserAndCreatedAtBetween(user, date.atStartOfDay(), date.atTime(LocalTime.MAX));
-        if (optionalAttendance.isPresent()) {
-            attendanceRepository.delete(optionalAttendance.get());
-            user.decreaseAttendanceNumber();
-            return;
-        }
-
-        attendanceRepository.save(new Attendance(user, date.atStartOfDay()));
-        user.increaseAttendanceNumber();
-    }
-
-    public void saveAttendanceForController(String name, String password) {
-        User user = userRepository.findByName(name)
-                .orElseThrow(UserNotFoundException::new);
-
+    private void validPassword(String password) {
         if (!passwordManager.isCorrectAttendancePassword(password)) {
             throw new IncorrectPasswordException();
         }
+    }
 
-        validSunday();
-
-        if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
+    private void validDuplicateAttendance(User user) {
+        LocalDateTime startOfToday = LocalDate.now().atStartOfDay();
+        if (attendanceRepository.existsByUserAndCreatedAtAfter(user, startOfToday)) {
             throw new DuplicateAttendanceException();
         }
-
-        Attendance attendance = new Attendance(user);
-        attendanceRepository.save(attendance);
-        user.increaseAttendanceNumber();
-        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
     }
 }
