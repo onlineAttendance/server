@@ -47,13 +47,19 @@ public class UserDetailDto {
         String time;
         boolean isAttendance;
 
-        public AttendanceDate(String date, LocalDateTime time) {
+        private AttendanceDate(String date, LocalDateTime time) {
             this.date = date;
             if (time != null) {
                 isAttendance = true;
                 this.time = time.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
             }
-            else isAttendance = false;
+            else {
+                isAttendance = false;
+            }
+        }
+
+        public static AttendanceDate fromDateAndDateTime(String date, LocalDateTime time) {
+            return new AttendanceDate(date, time);
         }
     }
 }

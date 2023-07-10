@@ -22,4 +22,6 @@ public enum Team {
             throw new ApplicationException(ErrorCode.NOT_FOUND_TEAM);
         }
     }
+
+
 }

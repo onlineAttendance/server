@@ -38,30 +38,45 @@ public class UserManageService {
 
     @Transactional(readOnly = true)
     public UserDetailDto userDetail(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
+        User user = userRepository.findById(userId)
+                .orElseThrow(NotFoundException::new);
 
-        StatisticsDto statistics = new StatisticsDto();
-        statistics.setName(List.of(user));
-
-        List<Attendance> attendances = attendanceRepository.findByUser(user);
-        for (Attendance attendance : attendances) {
-            statistics.addAttendance(user.getName(), attendance.getCreatedAt());
-        }
-
-        List<LocalDateTime> dateTimes = statistics.getNameAndAttendances().get(0).getDateTimes();
-        List<String> date = StatisticsDto.date;
-
-        List<UserDetailDto.AttendanceDate> attendanceDates = new ArrayList<>();
-        for (int i = 0; i < dateTimes.size(); i++) {
-            attendanceDates.add(new UserDetailDto.AttendanceDate(date.get(i), dateTimes.get(i)));
-        }
+        StatisticsDto statistics = createStatistic(user);
+        List<UserDetailDto.AttendanceDate> attendanceDates = createAttendanceDates(statistics);
 
         return UserDetailDto.of(user, attendanceDates);
     }
 
+    private List<UserDetailDto.AttendanceDate> createAttendanceDates(StatisticsDto statistics) {
+        List<LocalDateTime> dateTimes = statistics.getNameAndAttendanceList().get(0).getDateTimeList();
+        List<String> sundayDates = StatisticsDto.date;
+
+        List<UserDetailDto.AttendanceDate> attendanceDates = new ArrayList<>();
+        for (int i = 0; i < dateTimes.size(); i++) {
+            String sundayDate = sundayDates.get(i);
+            LocalDateTime attendanceDateTime = dateTimes.get(i);
+            UserDetailDto.AttendanceDate attendanceDate
+                    = UserDetailDto.AttendanceDate.fromDateAndDateTime(sundayDate, attendanceDateTime);
+            attendanceDates.add(attendanceDate);
+        }
+        return attendanceDates;
+    }
+
+    private StatisticsDto createStatistic(User user) {
+        StatisticsDto statistics = StatisticsDto.FromUser(user);
+        List<Attendance> attendances = attendanceRepository.findByUser(user);
+        for (Attendance attendance : attendances) {
+            statistics.addAttendance(user.getName(), attendance.getCreatedAt());
+        }
+        return statistics;
+    }
 
     public void resetPassword(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
-        user.updateUserPassword(passwordEncoder.encrypt("1234"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(NotFoundException::new);
+
+        final String initUserPassword = "1234";
+        String password = passwordEncoder.encrypt(initUserPassword);
+        user.updateUserPassword(password);
     }
 }

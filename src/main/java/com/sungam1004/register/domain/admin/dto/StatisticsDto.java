@@ -10,6 +10,55 @@ import java.util.*;
 
 public class StatisticsDto {
 
+    private final Map<String, Integer> mapNameAndIndex = new HashMap<>();
+    private final List<NameAndAttendance> nameAndAttendanceList = new ArrayList<>();
+
+    @Getter
+    public static class NameAndAttendance {
+        String name;
+        Team team;
+        List<LocalDateTime> dateTimeList;
+
+        public NameAndAttendance(String name, Team team) {
+            this.name = name;
+            this.team = team;
+            this.dateTimeList = new ArrayList<>(Collections.nCopies(date.size(), null));
+        }
+    }
+
+    private StatisticsDto(List<User> users) {
+        for (User user : users) {
+            mapNameAndIndex.put(user.getName(), nameAndAttendanceList.size());
+            nameAndAttendanceList.add(new NameAndAttendance(user.getName(), user.getTeam()));
+        }
+    }
+
+    public static StatisticsDto FromUsers(List<User> users) {
+        return new StatisticsDto(users);
+    }
+
+    public static StatisticsDto FromUser(User user) {
+        return new StatisticsDto(List.of(user));
+    }
+
+    public void addAttendance(String name, LocalDateTime dateTime) {
+        int index = mapNameAndIndex.get(name);
+        NameAndAttendance nameAndAttendance = nameAndAttendanceList.get(index);
+        String attendanceDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(dateTime);
+
+        for (int i = 0; i < date.size(); i++) {
+            if (attendanceDate.equals(date.get(i))) {
+                nameAndAttendance.dateTimeList.set(i, dateTime);
+                return;
+            }
+        }
+    }
+
+    public List<NameAndAttendance> getNameAndAttendanceList() {
+        return nameAndAttendanceList;
+    }
+
+
     public static final List<String> date =
             List.of("2023-01-01",
                     "2023-01-08",
@@ -64,44 +113,4 @@ public class StatisticsDto {
                     "2023-12-17",
                     "2023-12-24",
                     "2023-12-31");
-
-    @Getter
-    public static class NameAndAttendance {
-        String name;
-        Team team;
-        List<LocalDateTime> dateTimes;
-
-        public NameAndAttendance(String name, Team team) {
-            this.name = name;
-            this.team = team;
-            this.dateTimes = new ArrayList<>(Collections.nCopies(date.size(), null));
-        }
-    }
-
-    private final Map<String, Integer> mapNameIndex = new HashMap<>();
-    private final List<NameAndAttendance> nameAndAttendances = new ArrayList<>();
-
-    public void setName(List<User> users) {
-        for (User user : users) {
-            mapNameIndex.put(user.getName(), nameAndAttendances.size());
-            nameAndAttendances.add(new NameAndAttendance(user.getName(), user.getTeam()));
-        }
-    }
-
-    public void addAttendance(String name, LocalDateTime dateTime) {
-        int index = mapNameIndex.get(name);
-        NameAndAttendance nameAndAttendance = nameAndAttendances.get(index);
-        String attendanceDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(dateTime);
-
-        for (int i = 0; i < date.size(); i++) {
-            if (Objects.equals(date.get(i), attendanceDate)) {
-                nameAndAttendance.dateTimes.set(i, dateTime);
-                return;
-            }
-        }
-    }
-
-    public List<NameAndAttendance> getNameAndAttendances() {
-        return nameAndAttendances;
-    }
 }
