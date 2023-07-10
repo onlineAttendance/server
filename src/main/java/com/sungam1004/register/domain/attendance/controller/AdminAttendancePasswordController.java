@@ -1,9 +1,9 @@
 package com.sungam1004.register.domain.attendance.controller;
 
-import com.sungam1004.register.domain.attendance.application.AttendanceService;
 import com.sungam1004.register.domain.attendance.dto.AttendancePasswordDto;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.manager.PasswordManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class AdminAttendancePasswordController {
 
-    private final AttendanceService attendanceService;
+    private final PasswordManager passwordManager;
 
     @GetMapping("/userPassword")
     public String changeUserPasswordForm(Model model) {
@@ -36,7 +36,7 @@ public class AdminAttendancePasswordController {
             return "admin/password/changeUserPassword";
         }
         try {
-            attendanceService.changeAttendancePassword(requestDto.getPassword());
+            passwordManager.changeAttendancePassword(requestDto.getPassword());
         } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());

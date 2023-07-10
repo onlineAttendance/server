@@ -25,33 +25,42 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class AttendanceService {
+public class AttendanceSaveService {
 
     private final AttendanceRepository attendanceRepository;
     private final UserRepository userRepository;
     private final PasswordManager passwordManager;
 
     public Team saveAttendance(Long userId, String password) {
-        if (!passwordManager.isCorrectAttendancePassword(password)) {
-            throw new IncorrectPasswordException();
-        }
-        validSunday();
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
 
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        validToSaveAttendance(user, password);
+        saveAttendanceInDB(user);
 
-        if (attendanceRepository.existsByUserAndCreatedAtAfter(user, LocalDate.now().atStartOfDay())) {
-            throw new DuplicateAttendanceException();
-        }
+        return user.getTeam();
+    }
 
+    public void saveAttendanceForController(String name, String password) {
+        User user = userRepository.findByName(name)
+                .orElseThrow(UserNotFoundException::new);
+
+        validToSaveAttendance(user, password);
+        saveAttendanceInDB(user);
+    }
+
+
+    private void saveAttendanceInDB(User user) {
         Attendance attendance = new Attendance(user);
         attendanceRepository.save(attendance);
         user.increaseAttendanceNumber();
         log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
-        return user.getTeam();
     }
 
-    public void changeAttendancePassword(String password) {
-        passwordManager.changeAttendancePassword(password);
+    private void validToSaveAttendance(User user, String password) {
+        validPassword(password);
+        validSunday();
+        validDuplicateAttendance(user);
     }
 
     public void toggleAttendance(Long userId, String strDate) {
@@ -77,20 +86,6 @@ public class AttendanceService {
         Attendance attendance = new Attendance(user, attendanceDateTime);
         attendanceRepository.save(attendance);
         user.increaseAttendanceNumber();
-    }
-
-    public void saveAttendanceForController(String name, String password) {
-        User user = userRepository.findByName(name)
-                .orElseThrow(UserNotFoundException::new);
-
-        validPassword(password);
-        validSunday();
-        validDuplicateAttendance(user);
-
-        Attendance attendance = new Attendance(user);
-        attendanceRepository.save(attendance);
-        user.increaseAttendanceNumber();
-        log.info("출석이 성공적으로 저장되었습니다. name={}, dateTime={}", user.getName(), attendance.getCreatedAt());
     }
 
     private void validSunday() {

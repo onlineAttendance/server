@@ -1,9 +1,10 @@
 package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.admin.dto.LoginAdminDto;
-import com.sungam1004.register.domain.admin.service.AdminPasswordService;
+import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.manager.PasswordManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("admin")
 @Slf4j
 public class AdminLoginController {
-    private final AdminPasswordService adminPasswordService;
+    private final PasswordManager passwordManager;
 
     @GetMapping("/login")
     public String loginAdminForm(Model model) {
@@ -36,8 +37,9 @@ public class AdminLoginController {
         }
 
         try {
-            System.out.println("password = " + requestDto.getPassword());
-            adminPasswordService.loginAdmin(requestDto.getPassword());
+            if (!passwordManager.isCorrectAdminPassword(requestDto.getPassword())) {
+                throw new IncorrectPasswordException();
+            }
         } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.INCORRECT_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());
@@ -45,9 +47,9 @@ public class AdminLoginController {
             return "admin/loginAdmin";
         }
 
-        //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
+        // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
         HttpSession session = request.getSession();
-        //세션에 로그인 회원 정보 보관
+        // 세션에 로그인 회원 정보 보관
         session.setAttribute("Admin", "successLogin");
         return "redirect:" + redirectURL;
     }

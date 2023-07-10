@@ -1,9 +1,9 @@
 package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.admin.dto.AdminPasswordDto;
-import com.sungam1004.register.domain.admin.service.AdminPasswordService;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.manager.PasswordManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("admin")
 @Slf4j
 public class AdminChangePasswordController {
 
-    private final AdminPasswordService adminPasswordService;
+    private final PasswordManager passwordManager;
 
     @GetMapping("/adminPassword")
     public String changeAdminPasswordForm(Model model) {
@@ -39,7 +36,7 @@ public class AdminChangePasswordController {
             return "admin/password/changeAdminPassword";
         }
         try {
-            adminPasswordService.changeAdminPassword(requestDto.getPassword());
+            passwordManager.changeAdminPassword(requestDto.getPassword());
         } catch (ApplicationException e) {
             if (e.getError() == ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD) {
                 bindingResult.rejectValue("password", "0", e.getMessage());

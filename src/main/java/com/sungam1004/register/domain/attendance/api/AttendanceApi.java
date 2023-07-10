@@ -1,7 +1,7 @@
 package com.sungam1004.register.domain.attendance.api;
 
 import com.sungam1004.register.domain.attendance.application.AttendanceFindService;
-import com.sungam1004.register.domain.attendance.application.AttendanceService;
+import com.sungam1004.register.domain.attendance.application.AttendanceSaveService;
 import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
 import com.sungam1004.register.domain.user.application.UserPatchAccountService;
 import com.sungam1004.register.domain.user.entity.Team;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/users/attendances")
 public class AttendanceApi {
 
-    private final AttendanceService attendanceService;
+    private final AttendanceSaveService attendanceSaveService;
     private final AttendanceFindService attendanceFindService;
     private final UserPatchAccountService userPatchAccountService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AttendanceDto.Response saveAttendance(@UserId Long userId, @Valid @RequestBody AttendanceDto.Request requestDto) {
-        Team team = attendanceService.saveAttendance(userId, requestDto.getPassword());
+        Team team = attendanceSaveService.saveAttendance(userId, requestDto.getPassword());
         return attendanceFindService.findTodayAttendanceByTeam(team);
     }
 

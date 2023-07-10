@@ -11,30 +11,46 @@ import java.util.regex.Pattern;
 public class PasswordManager {
 
     @Value("${password.attendance}")
-    public String attendancePassword;
+    private String attendancePassword;
 
     @Value("${password.admin}")
-    public String adminPassword;
+    private String adminPassword;
+
+    private static final String attendancePasswordRegex = "^[0-9]{4}$";
+    private static final int adminPasswordMinLength = 5;
+    private static final int adminPasswordMaxLength = 20;
 
     public void changeAttendancePassword(String nPassword) {
-        if (Pattern.matches("^[0-9]{4}$", nPassword)) {
+        if (isMatchFormatToChangeAttendancePassword(nPassword)) {
             attendancePassword = nPassword;
         }
-        else throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD);
+        else {
+            throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD);
+        }
+    }
+
+    public void changeAdminPassword(String nPassword) {
+        if (isMatchFormatToChangeAdminPassword(nPassword)) {
+            adminPassword = nPassword;
+        }
+        else {
+            throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_ADMIN_PASSWORD);
+        }
     }
 
     public Boolean isCorrectAttendancePassword(String nPassword) {
         return attendancePassword.equals(nPassword);
     }
 
-    public void changeAdminPassword(String nPassword) {
-        if (nPassword.length() >= 5 && nPassword.length() <= 20) {
-            adminPassword = nPassword;
-        }
-        else throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_ADMIN_PASSWORD);
-    }
-
     public Boolean isCorrectAdminPassword(String nPassword) {
         return adminPassword.equals(nPassword);
+    }
+
+    private boolean isMatchFormatToChangeAdminPassword(String password) {
+        return adminPasswordMinLength <= password.length() && password.length() <= adminPasswordMaxLength;
+    }
+
+    private boolean isMatchFormatToChangeAttendancePassword(String password) {
+        return Pattern.matches(attendancePasswordRegex, password);
     }
 }

@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.user.controller;
 
-import com.sungam1004.register.domain.attendance.application.AttendanceService;
+import com.sungam1004.register.domain.attendance.application.AttendanceSaveService;
 import com.sungam1004.register.domain.user.application.UserManageService;
 import com.sungam1004.register.domain.user.dto.UserDetailDto;
 import com.sungam1004.register.domain.user.dto.UserManagerDto;
@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class AdminUserManageController {
     private final UserManageService userManageService;
-    private final AttendanceService attendanceService;
+    private final AttendanceSaveService attendanceSaveService;
 
     @GetMapping
     public String userManagerHome(Model model) {
@@ -36,7 +36,7 @@ public class AdminUserManageController {
 
     @GetMapping("change")
     public String changeAttendance(@RequestParam Long userId, @RequestParam String date) {
-        attendanceService.toggleAttendance(userId, date);
+        attendanceSaveService.toggleAttendance(userId, date);
         return "redirect:/admin/manager/detail/" + userId;
     }
 

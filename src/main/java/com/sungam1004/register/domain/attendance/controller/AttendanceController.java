@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.attendance.controller;
 
-import com.sungam1004.register.domain.attendance.application.AttendanceService;
+import com.sungam1004.register.domain.attendance.application.AttendanceSaveService;
 import com.sungam1004.register.domain.attendance.dto.AttendanceControllerDto;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("attendance")
 public class AttendanceController {
 
-    private final AttendanceService attendanceService;
+    private final AttendanceSaveService attendanceSaveService;
 
     @GetMapping
     public String attendancePage(Model model) {
@@ -39,7 +39,7 @@ public class AttendanceController {
         }
 
         try {
-            attendanceService.saveAttendanceForController(requestDto.getName(), requestDto.getPassword());
+            attendanceSaveService.saveAttendanceForController(requestDto.getName(), requestDto.getPassword());
             //redirectAttributes.addAttribute("team", team);
             return "redirect:/attendance/completeAttendance";
         } catch (ApplicationException e) {
