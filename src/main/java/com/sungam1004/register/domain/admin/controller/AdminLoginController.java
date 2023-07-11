@@ -1,8 +1,6 @@
 package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.admin.dto.LoginAdminDto;
-import com.sungam1004.register.domain.attendance.exception.IncorrectPasswordException;
-import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import com.sungam1004.register.global.manager.PasswordManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,14 +34,9 @@ public class AdminLoginController {
             return "admin/loginAdmin";
         }
 
-        try {
-            if (!passwordManager.isCorrectAdminPassword(requestDto.getPassword())) {
-                throw new IncorrectPasswordException();
-            }
-        } catch (ApplicationException e) {
-            if (e.getError() == ErrorCode.INCORRECT_PASSWORD) {
-                bindingResult.rejectValue("password", "0", e.getMessage());
-            }
+        if (!passwordManager.isCorrectAdminPassword(requestDto.getPassword())) {
+            String message = ErrorCode.INCORRECT_PASSWORD.getMessage();
+            bindingResult.rejectValue("password", null, message);
             return "admin/loginAdmin";
         }
 

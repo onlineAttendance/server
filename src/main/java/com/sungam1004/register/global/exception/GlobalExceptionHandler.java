@@ -3,6 +3,7 @@ package com.sungam1004.register.global.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -66,6 +67,12 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<?> handleBusinessException(final ApplicationException e) {
         log.error("ApplicationException", e);
         return ErrorResponse.toResponseEntity(e.getError());
+    }
+
+    @ExceptionHandler(BindException.class)
+    protected ResponseEntity<?> handleBindingException(BindException e) {
+        log.error("BindException", e);
+        return ErrorResponse.toResponseEntity(ErrorCode.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

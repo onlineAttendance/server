@@ -1,8 +1,7 @@
 package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.admin.dto.AdminPasswordDto;
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.global.exception.NotFormatMatchAdminPasswordException;
 import com.sungam1004.register.global.manager.PasswordManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +36,8 @@ public class AdminChangePasswordController {
         }
         try {
             passwordManager.changeAdminPassword(requestDto.getPassword());
-        } catch (ApplicationException e) {
-            if (e.getError() == ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD) {
-                bindingResult.rejectValue("password", "0", e.getMessage());
-            }
+        } catch (NotFormatMatchAdminPasswordException e) {
+            bindingResult.rejectValue("password", null, e.getMessage());
             return "admin/password/changeAdminPassword";
         }
         return "admin/password/completeChangePassword";

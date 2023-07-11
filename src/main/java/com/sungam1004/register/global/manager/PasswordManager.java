@@ -1,5 +1,7 @@
 package com.sungam1004.register.global.manager;
 
+import com.sungam1004.register.global.exception.NotFormatMatchAdminPasswordException;
+import com.sungam1004.register.global.exception.NotFormatMatchUserPasswordException;
 import com.sungam1004.register.global.exception.ApplicationException;
 import com.sungam1004.register.global.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +27,7 @@ public class PasswordManager {
             attendancePassword = nPassword;
         }
         else {
-            throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_USER_PASSWORD);
+            throw new NotFormatMatchUserPasswordException();
         }
     }
 
@@ -34,7 +36,7 @@ public class PasswordManager {
             adminPassword = nPassword;
         }
         else {
-            throw new ApplicationException(ErrorCode.NOT_FORMAT_MATCH_ADMIN_PASSWORD);
+            throw new NotFormatMatchAdminPasswordException();
         }
     }
 
