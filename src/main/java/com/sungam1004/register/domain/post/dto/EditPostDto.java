@@ -1,6 +1,7 @@
 package com.sungam1004.register.domain.post.dto;
 
 import com.sungam1004.register.domain.post.entity.Post;
+import com.sungam1004.register.domain.post.entity.Question;
 import com.sungam1004.register.global.validation.annotation.DateValid;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Data
@@ -32,18 +33,31 @@ public class EditPostDto {
     @DateValid(message = "yyyy-MM-dd 형식이어야 합니다.", pattern = "yyyy-MM-dd")
     private String date;
 
-    public static EditPostDto of(Post post) {
+    @Valid
+    private List<QuestionDto> questionDtoList;
+
+    public static EditPostDto fromPost(Post post) {
+        List<QuestionDto> questionDtoList = createQuestionDtoList(post.getQuestions());
+
         return EditPostDto.builder()
                 .content(post.getContent())
                 .title(post.getTitle())
                 .date(post.getDate().format(DateTimeFormatter.ISO_DATE))
                 .postId(post.getId())
-                .questions(new ArrayList<>())
+                .questionDtoList(questionDtoList)
                 .build();
     }
 
-    @Valid
-    private List<Question> questions;
+    private static List<QuestionDto> createQuestionDtoList(List<Question> questions) {
+        List<QuestionDto> questionDtoList = questions.stream()
+                .sorted(Comparator.comparingInt(Question::getOrder))
+                .map(question -> new QuestionDto(question.getOrder(), question.getContent()))
+                .toList();
+        for (int i = questions.size() + 1; i <= 3; ++i) {
+            questionDtoList.add(new QuestionDto(i, ""));
+        }
+        return questionDtoList;
+    }
 
     public Post toEntity() {
         return Post.builder()
@@ -56,11 +70,16 @@ public class EditPostDto {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Question {
+    public static class QuestionDto {
 
         private Integer order;
 
         private String content;
+
+        public boolean isContentBlank() {
+            return content.trim().length() == 0;
+        }
+
     }
 
 }

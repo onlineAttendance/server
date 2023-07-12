@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class PostSummaryDto {
@@ -23,18 +26,18 @@ public class PostSummaryDto {
         this.isExist = isExist;
     }
 
-    public static PostSummaryDto createExistPost(Long postId, String date, String title) {
+    public static PostSummaryDto createFromExistPost(Long postId, String title, LocalDate date) {
         return PostSummaryDto.builder()
                 .id(postId)
                 .title(title)
-                .date(date)
+                .date(date.format(DateTimeFormatter.ISO_DATE))
                 .isExist(true)
                 .build();
     }
 
-    public static PostSummaryDto createNotExistPost(String date) {
+    public static PostSummaryDto createFromNotExistPost(LocalDate date) {
         return PostSummaryDto.builder()
-                .date(date)
+                .date(date.format(DateTimeFormatter.ISO_DATE))
                 .isExist(false)
                 .build();
     }

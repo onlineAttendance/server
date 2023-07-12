@@ -1,8 +1,8 @@
 package com.sungam1004.register.domain.api;
 
 import com.sungam1004.register.domain.post.application.AdminPostService;
+import com.sungam1004.register.domain.post.application.AdminSavePostService;
 import com.sungam1004.register.domain.post.dto.SavePostDto;
-import com.sungam1004.register.domain.post.repository.PostRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +32,17 @@ class PostApiTest {
     @Autowired
     private AdminPostService postService;
 
+    @Autowired
+    private AdminSavePostService savePostService;
+
     @Test
     @DisplayName("Post 조회 - 1개 등록")
     void findPost1() throws Exception {
         // given
-        SavePostDto.Request post1 = new SavePostDto.Request("title1", "content1", "2023-02-05",
-                List.of(new SavePostDto.Request.Question(1, "question1"),
-                        new SavePostDto.Request.Question(2, "question2")));
-        postService.savePost(post1);
+        SavePostDto post1 = new SavePostDto("title1", "content1", "2023-02-05",
+                List.of(new SavePostDto.Question(1, "question1"),
+                        new SavePostDto.Question(2, "question2")));
+        savePostService.savePost(post1);
 
         System.out.println("=====================================");
         // expected
@@ -61,9 +64,9 @@ class PostApiTest {
     void findPost6() throws Exception {
         // given
         IntStream.rangeClosed(1, 6).forEach(count -> {
-            postService.savePost(new SavePostDto.Request("title" + count, "content" + count, "2023-02-0" + count,
-                    List.of(new SavePostDto.Request.Question(1, "question1"),
-                            new SavePostDto.Request.Question(2, "question2"))));
+            savePostService.savePost(new SavePostDto("title" + count, "content" + count, "2023-02-0" + count,
+                    List.of(new SavePostDto.Question(1, "question1"),
+                            new SavePostDto.Question(2, "question2"))));
         });
 
         System.out.println("=====================================");
@@ -91,14 +94,14 @@ class PostApiTest {
     void findPost12() throws Exception {
         // given
         IntStream.rangeClosed(1, 9).forEach(count -> {
-            postService.savePost(new SavePostDto.Request("title" + count, "content" + count, "2023-02-0" + count,
-                    List.of(new SavePostDto.Request.Question(1, "question1"),
-                            new SavePostDto.Request.Question(2, "question2"))));
+            savePostService.savePost(new SavePostDto("title" + count, "content" + count, "2023-02-0" + count,
+                    List.of(new SavePostDto.Question(1, "question1"),
+                            new SavePostDto.Question(2, "question2"))));
         });
         IntStream.rangeClosed(10, 12).forEach(count -> {
-            postService.savePost(new SavePostDto.Request("title" + count, "content" + count, "2023-02-" + count,
-                    List.of(new SavePostDto.Request.Question(1, "question1"),
-                            new SavePostDto.Request.Question(2, "question2"))));
+            savePostService.savePost(new SavePostDto("title" + count, "content" + count, "2023-02-" + count,
+                    List.of(new SavePostDto.Question(1, "question1"),
+                            new SavePostDto.Question(2, "question2"))));
         });
 
         System.out.println("=====================================");

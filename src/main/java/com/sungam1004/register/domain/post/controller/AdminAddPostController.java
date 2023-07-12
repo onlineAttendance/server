@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.post.controller;
 
-import com.sungam1004.register.domain.post.application.AdminPostService;
+import com.sungam1004.register.domain.post.application.AdminSavePostService;
 import com.sungam1004.register.domain.post.dto.SavePostDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,26 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin/post")
 @Slf4j
 public class AdminAddPostController {
-    private final AdminPostService adminPostService;
+    private final AdminSavePostService adminSavePostService;
 
     @GetMapping("add")
     public String savePostForm(Model model) {
-        SavePostDto.Request request = new SavePostDto.Request();
-        request.getQuestions().add(new SavePostDto.Request.Question(1, ""));
-        request.getQuestions().add(new SavePostDto.Request.Question(2, ""));
-        request.getQuestions().add(new SavePostDto.Request.Question(3, ""));
+        SavePostDto request = SavePostDto.initialSetThreeQuestions();
         model.addAttribute("savePostDto", request);
         return "admin/post/savePostForm";
     }
 
     @PostMapping("add")
-    public String savePost(@Valid @ModelAttribute("savePostDto") SavePostDto.Request requestDto,
+    public String savePost(@Valid @ModelAttribute("savePostDto") SavePostDto requestDto,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            log.info("post 저장 실패");
+            log.error("post 저장 실패");
             return "admin/post/savePostForm";
         }
-        adminPostService.savePost(requestDto);
+        adminSavePostService.savePost(requestDto);
         return "admin/post/completeSavePost";
     }
 }

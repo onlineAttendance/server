@@ -9,7 +9,7 @@
     <input type="hidden" th:field="*{postId}" th:value="*{postId}">
     <h2 th:text="*{title}">Title</h2>
     <div class="text-start" style="width: max-content">
-        <div th:utext="*{#strings.replace(content,'&#10;','&lt;br&gt;')}">content</div>
+        <div th:utext="*{#strings.replace(content,'&#10;', '&lt;br&gt;')}">content</div>
     </div>
     <br/>
     <hr/>

@@ -3,6 +3,7 @@ package com.sungam1004.register.domain.post.controller;
 import com.sungam1004.register.domain.post.application.AdminPostService;
 import com.sungam1004.register.domain.post.dto.PostDetailDto;
 import com.sungam1004.register.domain.post.dto.PostSummaryDto;
+import com.sungam1004.register.domain.post.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,15 +23,20 @@ public class AdminFindPostController {
 
     @GetMapping("list")
     public String adminPostHome(Model model) {
-        List<PostSummaryDto> ret = adminPostService.findPostSummaryDtoList();
-        model.addAttribute("postManagerDto", ret);
+        List<PostSummaryDto> postSummaryDtoList = adminPostService.findPostSummaryDtoList();
+        model.addAttribute("postManagerDto", postSummaryDtoList);
         return "admin/post/postList";
     }
 
     @GetMapping("detail/{postId}")
     public String postDetailForm(@PathVariable Long postId, Model model) {
-        PostDetailDto response = adminPostService.postDetail(postId);
-        model.addAttribute("postDetailDto", response);
+        try {
+            PostDetailDto response = adminPostService.postDetail(postId);
+            model.addAttribute("postDetailDto", response);
+        } catch (PostNotFoundException e) {
+            log.error("PostNotFoundException: {}", e.getMessage());
+            return "error/404";
+        }
         return "admin/post/postDetail";
     }
 }

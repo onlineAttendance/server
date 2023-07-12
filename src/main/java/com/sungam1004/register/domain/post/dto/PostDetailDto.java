@@ -1,7 +1,11 @@
 package com.sungam1004.register.domain.post.dto;
 
 import com.sungam1004.register.domain.post.entity.Post;
-import lombok.*;
+import com.sungam1004.register.domain.post.entity.Question;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,23 +25,29 @@ public class PostDetailDto {
 
 
     @Builder
-    public PostDetailDto(String title, String content, String date, Long postId) {
+    public PostDetailDto(String title, String content, String date, Long postId, List<String> questions) {
         this.title = title;
         this.content = content;
         this.date = date;
         this.postId = postId;
+        this.questions = questions;
     }
 
-    public static PostDetailDto of(Post post) {
-        PostDetailDto ret = PostDetailDto.builder()
+    public static PostDetailDto createFromPost(Post post) {
+        List<String> questions = getQuestions(post.getQuestions());
+
+        return PostDetailDto.builder()
                 .content(post.getContent())
                 .title(post.getTitle())
                 .date(post.getDate().format(DateTimeFormatter.ISO_DATE))
                 .postId(post.getId())
+                .questions(questions)
                 .build();
-        post.getQuestions()
-                .forEach(question -> ret.getQuestions().add(question.getContent()));
-        return ret;
     }
 
+    private static List<String> getQuestions(List<Question> questions) {
+        return questions.stream()
+                .map(Question::getContent)
+                .toList();
+    }
 }
