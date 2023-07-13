@@ -19,9 +19,16 @@ public class UserSignupService {
     private final PasswordEncoder passwordEncoder;
 
     public void addUser(User user) {
-        if (userRepository.existsByName(user.getName()))
-            throw new DuplicateUserNameException();
-        user.updateUserPassword(passwordEncoder.encrypt(user.getPassword()));
+        validUserName(user.getName());
+
+        String encryptedPassword = passwordEncoder.encrypt(user.getPassword());
+        user.updateUserPassword(encryptedPassword);
         userRepository.save(user);
+    }
+
+    private void validUserName(String name) {
+        if (userRepository.existsByName(name)) {
+            throw new DuplicateUserNameException();
+        }
     }
 }

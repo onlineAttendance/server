@@ -1,11 +1,10 @@
-package com.sungam1004.register.domain.user.controller;
+package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.image.application.ImageService;
 import com.sungam1004.register.domain.user.application.UserSignupService;
 import com.sungam1004.register.domain.user.dto.AddUserDto;
 import com.sungam1004.register.domain.user.entity.Team;
-import com.sungam1004.register.global.exception.ApplicationException;
-import com.sungam1004.register.global.exception.ErrorCode;
+import com.sungam1004.register.domain.user.exception.DuplicateUserNameException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +43,8 @@ public class AdminAddUserController {
         try {
             String faceImageUri = imageService.registryImage(faceImageFile);
             userSignupService.addUser(requestDto.toEntity(faceImageUri));
-        } catch (ApplicationException e) {
-            if (e.getError() == ErrorCode.DUPLICATE_USER_NAME) {
-                bindingResult.rejectValue("name", "0", e.getMessage());
-            }
+        } catch (DuplicateUserNameException e) {
+            bindingResult.rejectValue("name", null, e.getMessage());
             model.addAttribute("teams", Team.getTeamNameList());
             return "admin/userManage/addUser";
         }

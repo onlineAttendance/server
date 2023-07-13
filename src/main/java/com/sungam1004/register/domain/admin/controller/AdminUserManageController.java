@@ -1,4 +1,4 @@
-package com.sungam1004.register.domain.user.controller;
+package com.sungam1004.register.domain.admin.controller;
 
 import com.sungam1004.register.domain.attendance.application.AttendanceSaveService;
 import com.sungam1004.register.domain.user.application.UserManageService;
