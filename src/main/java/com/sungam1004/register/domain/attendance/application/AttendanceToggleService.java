@@ -1,6 +1,7 @@
 package com.sungam1004.register.domain.attendance.application;
 
 import com.sungam1004.register.domain.attendance.entity.Attendance;
+import com.sungam1004.register.domain.attendance.exception.InvalidDayOfWeekException;
 import com.sungam1004.register.domain.attendance.repository.AttendanceRepository;
 import com.sungam1004.register.domain.user.entity.User;
 import com.sungam1004.register.domain.user.exception.UserNotFoundException;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,6 +30,8 @@ public class AttendanceToggleService {
         User user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
         LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
+        validSunday(date);
+
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
 
@@ -47,5 +51,12 @@ public class AttendanceToggleService {
         Attendance attendance = new Attendance(user, attendanceDateTime);
         attendanceRepository.save(attendance);
         user.increaseAttendanceNumber();
+    }
+
+    private void validSunday(LocalDate localDate) {
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        if (dayOfWeek.getValue() != DayOfWeek.SUNDAY.getValue()) {
+            throw new InvalidDayOfWeekException();
+        }
     }
 }
