@@ -15,11 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Service
 @Slf4j
@@ -30,6 +29,7 @@ public class AttendanceSaveService {
     private final AttendanceRepository attendanceRepository;
     private final UserRepository userRepository;
     private final PasswordManager passwordManager;
+    private final Clock clock;
 
     public Team saveAttendance(Long userId, String password) {
         User user = userRepository.findById(userId)
@@ -63,33 +63,8 @@ public class AttendanceSaveService {
         validDuplicateAttendance(user);
     }
 
-    public void toggleAttendance(Long userId, String strDate) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(UserNotFoundException::new);
-        LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-
-        attendanceRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay)
-                .ifPresentOrElse(
-                        attendance -> deleteAttendance(user, attendance),
-                        () -> saveAttendance(user, startOfDay)
-                );
-    }
-
-    private void deleteAttendance(User user, Attendance attendance) {
-        attendanceRepository.delete(attendance);
-        user.decreaseAttendanceNumber();
-    }
-
-    private void saveAttendance(User user, LocalDateTime attendanceDateTime) {
-        Attendance attendance = new Attendance(user, attendanceDateTime);
-        attendanceRepository.save(attendance);
-        user.increaseAttendanceNumber();
-    }
-
     private void validSunday() {
-        DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
+        DayOfWeek dayOfWeek = LocalDate.now(clock).getDayOfWeek();
         // 월=1, 일=7
         if (dayOfWeek.getValue() != DayOfWeek.SUNDAY.getValue()) {
             throw new InvalidDayOfWeekException();
@@ -103,7 +78,7 @@ public class AttendanceSaveService {
     }
 
     private void validDuplicateAttendance(User user) {
-        LocalDateTime startOfToday = LocalDate.now().atStartOfDay();
+        LocalDateTime startOfToday = LocalDate.now(clock).atStartOfDay();
         if (attendanceRepository.existsByUserAndCreatedAtAfter(user, startOfToday)) {
             throw new DuplicateAttendanceException();
         }
