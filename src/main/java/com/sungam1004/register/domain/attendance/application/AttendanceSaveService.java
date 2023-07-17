@@ -31,7 +31,7 @@ public class AttendanceSaveService {
     private final PasswordManager passwordManager;
     private final Clock clock;
 
-    public Team saveAttendance(Long userId, String password) {
+    public Team saveAttendanceByUserId(Long userId, String password) {
         User user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
 
@@ -41,7 +41,7 @@ public class AttendanceSaveService {
         return user.getTeam();
     }
 
-    public void saveAttendanceForController(String name, String password) {
+    public void saveAttendanceByName(String name, String password) {
         User user = userRepository.findByName(name)
                 .orElseThrow(UserNotFoundException::new);
 

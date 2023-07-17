@@ -40,7 +40,7 @@ public class AttendanceController {
         }
 
         try {
-            attendanceSaveService.saveAttendanceForController(requestDto.getName(), requestDto.getPassword());
+            attendanceSaveService.saveAttendanceByName(requestDto.getName(), requestDto.getPassword());
             return "redirect:/attendance/completeAttendance";
         } catch (UserNotFoundException | IncorrectPasswordException |
                  InvalidDayOfWeekException | DuplicateAttendanceException e) {

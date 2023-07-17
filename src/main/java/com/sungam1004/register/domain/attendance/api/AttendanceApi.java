@@ -25,7 +25,7 @@ public class AttendanceApi {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AttendanceDto.Response saveAttendance(@UserId Long userId, @Valid @RequestBody AttendanceDto.Request requestDto) {
-        Team team = attendanceSaveService.saveAttendance(userId, requestDto.getPassword());
+        Team team = attendanceSaveService.saveAttendanceByUserId(userId, requestDto.getPassword());
         return attendanceFindService.findTodayAttendanceByTeam(team);
     }
 
