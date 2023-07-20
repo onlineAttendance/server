@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.api;
 
-import com.sungam1004.register.domain.post.application.AdminPostService;
+import com.sungam1004.register.domain.post.application.AdminFindPostService;
 import com.sungam1004.register.domain.post.application.AdminSavePostService;
 import com.sungam1004.register.domain.post.dto.SavePostDto;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +30,7 @@ class PostApiTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private AdminPostService postService;
+    private AdminFindPostService postService;
 
     @Autowired
     private AdminSavePostService savePostService;

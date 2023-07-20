@@ -24,11 +24,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@Transactional
-public class AdminPostService {
+@Transactional(readOnly = true)
+public class AdminFindPostService {
     private final PostRepository postRepository;
 
-    @Transactional(readOnly = true)
     public List<PostSummaryDto> findPostSummaryDtoList() {
         final String sortProperty = "date";
         List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.ASC, sortProperty));
@@ -42,19 +41,19 @@ public class AdminPostService {
 
     private List<PostSummaryDto> createPostSummaryDtoList(List<Post> posts, List<LocalDate> sundayDates) {
         List<PostSummaryDto> postSummaryDtoList = new ArrayList<>();
-        int startIndexToSearchPost = 0;
+        int searchIndex = 0;
         for (LocalDate sundayDate : sundayDates) {
-            PostSummaryDto postSummaryDto = null;
+            PostSummaryDto postSummaryDto;
 
-            if (startIndexToSearchPost >= posts.size()) {
+            if (searchIndex >= posts.size()) {
                 postSummaryDto = PostSummaryDto.createFromNotExistPost(sundayDate);
             }
             else {
-                Post post = posts.get(startIndexToSearchPost);
+                Post post = posts.get(searchIndex);
 
                 if (isEqualPostToDate(post, sundayDate)) {
                     postSummaryDto = PostSummaryDto.createFromExistPost(post.getId(), post.getTitle(), sundayDate);
-                    startIndexToSearchPost++;
+                    searchIndex++;
                 }
                 else {
                     postSummaryDto = PostSummaryDto.createFromNotExistPost(sundayDate);
@@ -70,14 +69,12 @@ public class AdminPostService {
         return post.getDate().equals(sundayDate);
     }
 
-    @Transactional(readOnly = true)
     public PostDetailDto postDetail(Long postId) {
         Post post = postRepository.findWithQuestionsById(postId)
                 .orElseThrow(PostNotFoundException::new);
         return PostDetailDto.createFromPost(post);
     }
 
-    @Transactional(readOnly = true)
     public List<PostResponseDto> findPostUsingPage(int page) {
         final int dataNumberPerPage = 5;
         final String sortProperty = "date";

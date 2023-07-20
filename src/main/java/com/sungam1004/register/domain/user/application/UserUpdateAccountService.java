@@ -14,23 +14,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class UserPatchAccountService {
+public class UserUpdateAccountService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public void changePassword(Long userId, String password) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        user.updateUserPassword(passwordEncoder.encrypt(password));
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        String encryptPassword = passwordEncoder.encrypt(password);
+        user.updateUserPassword(encryptPassword);
     }
 
 
     public void changeFaceImage(Long userId, String faceImageUri) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
         user.updateFaceImageUri(faceImageUri);
     }
 
     public Team findTeam(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
         return user.getTeam();
     }
 }

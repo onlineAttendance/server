@@ -3,7 +3,7 @@ package com.sungam1004.register.domain.attendance.api;
 import com.sungam1004.register.domain.attendance.application.AttendanceFindService;
 import com.sungam1004.register.domain.attendance.application.AttendanceSaveService;
 import com.sungam1004.register.domain.attendance.dto.AttendanceDto;
-import com.sungam1004.register.domain.user.application.UserPatchAccountService;
+import com.sungam1004.register.domain.user.application.UserUpdateAccountService;
 import com.sungam1004.register.domain.user.entity.Team;
 import com.sungam1004.register.global.resolver.UserId;
 import jakarta.validation.Valid;
@@ -20,7 +20,7 @@ public class AttendanceApi {
 
     private final AttendanceSaveService attendanceSaveService;
     private final AttendanceFindService attendanceFindService;
-    private final UserPatchAccountService userPatchAccountService;
+    private final UserUpdateAccountService userUpdateAccountService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,7 +31,7 @@ public class AttendanceApi {
 
     @GetMapping
     public AttendanceDto.Response findTeamAttendance(@UserId Long userId) {
-        Team team = userPatchAccountService.findTeam(userId);
+        Team team = userUpdateAccountService.findTeam(userId);
         return attendanceFindService.findTodayAttendanceByTeam(team);
     }
 }

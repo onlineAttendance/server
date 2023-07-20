@@ -31,7 +31,10 @@ public class AttendanceToggleService {
                 .orElseThrow(UserNotFoundException::new);
         LocalDate date = LocalDate.parse(strDate, DateTimeFormatter.ISO_DATE);
         validSunday(date);
+        updateRepository(user, date);
+    }
 
+    private void updateRepository(User user, LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
 

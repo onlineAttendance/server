@@ -1,7 +1,7 @@
 package com.sungam1004.register.domain.post.api;
 
 import com.sungam1004.register.domain.post.dto.PostResponseDto;
-import com.sungam1004.register.domain.post.application.AdminPostService;
+import com.sungam1004.register.domain.post.application.AdminFindPostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +17,10 @@ import java.util.List;
 @Slf4j
 public class PostApi {
 
-    private final AdminPostService adminPostService;
+    private final AdminFindPostService adminFindPostService;
 
     @GetMapping("/{page}")
     public List<PostResponseDto> findPostUsingPage(@PathVariable int page) {
-        return adminPostService.findPostUsingPage(page);
+        return adminFindPostService.findPostUsingPage(page);
     }
 }

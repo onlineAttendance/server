@@ -1,6 +1,6 @@
 package com.sungam1004.register.domain.post.controller;
 
-import com.sungam1004.register.domain.post.application.AdminPostService;
+import com.sungam1004.register.domain.post.application.AdminFindPostService;
 import com.sungam1004.register.domain.post.dto.PostDetailDto;
 import com.sungam1004.register.domain.post.dto.PostSummaryDto;
 import com.sungam1004.register.domain.post.exception.PostNotFoundException;
@@ -19,11 +19,11 @@ import java.util.List;
 @RequestMapping("admin/post")
 @Slf4j
 public class AdminFindPostController {
-    private final AdminPostService adminPostService;
+    private final AdminFindPostService adminFindPostService;
 
     @GetMapping("list")
     public String adminPostHome(Model model) {
-        List<PostSummaryDto> postSummaryDtoList = adminPostService.findPostSummaryDtoList();
+        List<PostSummaryDto> postSummaryDtoList = adminFindPostService.findPostSummaryDtoList();
         model.addAttribute("postManagerDto", postSummaryDtoList);
         return "admin/post/postList";
     }
@@ -31,7 +31,7 @@ public class AdminFindPostController {
     @GetMapping("detail/{postId}")
     public String postDetailForm(@PathVariable Long postId, Model model) {
         try {
-            PostDetailDto response = adminPostService.postDetail(postId);
+            PostDetailDto response = adminFindPostService.postDetail(postId);
             model.addAttribute("postDetailDto", response);
         } catch (PostNotFoundException e) {
             log.error("PostNotFoundException: {}", e.getMessage());
