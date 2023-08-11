@@ -9,7 +9,7 @@ Developer: [Whyknow](https://github.com/whyknow0604)
 <img width="963" alt="스크린샷 2023-07-19 오전 11 56 13" src="https://github.com/onlineAttendance/server/assets/51076814/955d8c18-e431-4cda-98c0-78580e85be46">
 
 
-### Thymeleaf version(CSR)
+### Thymeleaf version(SSR)
 Web Site: [https://sungam.site/attendance](https://sungam.site/attendance) <br>
 Developer: [redcarrot1](https://github.com/redcarrot1)
 <img width="1024" alt="스크린샷 2023-07-19 오전 11 58 48" src="https://github.com/onlineAttendance/server/assets/51076814/993da500-7be3-4eee-9fb4-04951ee4861f">
